@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Montserrat;
+  font-weight: 600;
+}
+
+:root {
+  --verde_oscuro: #0C523B;
+  --verde_primario: #528A3F;
+  --verde_secundario: #3F6F37;
+  --cremita: #D3D8BD;
+  --verde_fondos: #e9f7ec;
+  --blanco_fondo: #F5FFFA;
+  --letra_logo: 'Comfortaa', cursive;
+  --letra_titulo: 'Poppins', sans-serif;
+  --swiper-pagination-color: var(--verde_secundario);
+}
