@@ -1,5 +1,39 @@
 <script>
 	import './index.css';
+	import Calendar from 'color-calendar';
+	import 'color-calendar/dist/css/theme-basic.css';
+	import 'color-calendar/dist/css/theme-glass.css';
+	import { onMount } from 'svelte';
+	
+	onMount(() => {
+		new Calendar({
+		id: '#color-calendar',
+		eventsData: myEvents,
+		
+	})
+		
+	})
+
+	const myEvents = [
+		{
+			start: '2021-04-15T06:00:00',
+			end: '2021-04-15T20:30:00',
+			name: 'Event 1',
+			url: 'https://www.cssscript.com',
+			desc: 'Description 1',
+			// more key value pairs here
+		},{
+			start: '2021-04-16T06:00:00',
+			end: '2021-04-16T20:30:00',
+			name: 'Event 2',
+			url: 'https://www.cssscript.com',
+		},{
+			start: '2021-04-16T06:00:00',
+			end: '2021-04-17T20:30:00',
+			name: 'Event 3',
+			url: 'https://www.cssscript.com',
+		},
+	]
 </script>
 
 <div class="wrapper">
@@ -38,7 +72,7 @@
 		</div>
 	</div>
 	<div class="derecha">
-		<div class="calendario">
+		<div class="calendario" id="color-calendar">
 			<h1>Calendario</h1>
 		</div>
 		<div class="evento">
