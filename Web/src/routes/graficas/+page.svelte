@@ -1,4 +1,7 @@
 <script>
+	import Chart from 'chart.js/auto';
+	export let data;
+
 	// import Swiper bundle with all modules installed
 	import Swiper from 'swiper/bundle';
 
@@ -25,6 +28,25 @@
 				prevEl: '.swiper-button-prev'
 			}
 		});
+
+		const ctx = document.getElementById('myChart');
+
+		new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+				datasets: [
+					{
+						label: 'Potreros',
+						data: [12, 19, 3, 5, 2, 3],
+						borderWidth: 1
+					}
+				]
+			},
+			options: {
+				maintainAspectRatio: false
+			}
+		});
 	});
 </script>
 
@@ -33,7 +55,7 @@
 	<!-- Additional required wrapper -->
 	<div class="swiper-wrapper">
 		<!-- Slides -->
-		{#each ['Pastoreo', 'Stock', 'Tasa de Crecimento', 'Uso del suelo'] as grafica}
+		{#each data.graficas as grafica}
 			<div class="swiper-slide">
 				<div class="titulo">
 					<h1>{grafica}</h1>
@@ -42,7 +64,7 @@
 					<div class="recomendaciones">
 						<h2>Recomendaciones:</h2>
 					</div>
-					<div class="grafica">grafica aqui</div>
+					<div class="grafica"><canvas id="myChart" /></div>
 				</div>
 			</div>
 		{/each}
@@ -77,12 +99,12 @@
 	}
 
 	.recomendaciones {
-		@apply mt-4 pt-4 pb-80 p-12 rounded-xl;
+		@apply mt-4 pt-4 h-auto w-80 text-center rounded-xl;
 		background-color: var(--verde_fondos);
 	}
 
 	.grafica {
-		@apply mt-4 pt-4 pb-80 p-60 rounded-xl;
+		@apply mt-4 pt-4 h-96 w-2/4 p-5 rounded-xl;
 		background-color: var(--verde_fondos);
 	}
 

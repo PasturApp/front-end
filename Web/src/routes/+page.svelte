@@ -4,15 +4,18 @@
 	import 'color-calendar/dist/css/theme-basic.css';
 	import 'color-calendar/dist/css/theme-glass.css';
 	import { onMount } from 'svelte';
-	
+
 	onMount(() => {
 		new Calendar({
-		id: '#color-calendar',
-		eventsData: myEvents,
-		
-	})
-		
-	})
+			theme: 'glass',
+			id: '#color-calendar',
+			eventsData: myEvents,
+			primaryColor: '#528A3F',
+			headerColor: '#F5FFFA',
+			headerBackgroundColor: '#3F6F37',
+			weekdaysColor: '#0C523B'
+		});
+	});
 
 	const myEvents = [
 		{
@@ -20,20 +23,22 @@
 			end: '2021-04-15T20:30:00',
 			name: 'Event 1',
 			url: 'https://www.cssscript.com',
-			desc: 'Description 1',
+			desc: 'Description 1'
 			// more key value pairs here
-		},{
+		},
+		{
 			start: '2021-04-16T06:00:00',
 			end: '2021-04-16T20:30:00',
 			name: 'Event 2',
-			url: 'https://www.cssscript.com',
-		},{
+			url: 'https://www.cssscript.com'
+		},
+		{
 			start: '2021-04-16T06:00:00',
 			end: '2021-04-17T20:30:00',
 			name: 'Event 3',
-			url: 'https://www.cssscript.com',
-		},
-	]
+			url: 'https://www.cssscript.com'
+		}
+	];
 </script>
 
 <div class="wrapper">
@@ -72,16 +77,12 @@
 		</div>
 	</div>
 	<div class="derecha">
-		<div class="calendario" id="color-calendar">
-			<h1>Calendario</h1>
-		</div>
+		<div class="calendario" id="color-calendar" />
 		<div class="evento">
 			<div>
 				<h1>Próximo evento</h1>
 			</div>
-			<div class="fecha">
-				Fecha 8/11/23  15 hs
-			</div>
+			<div class="fecha">Fecha 8/11/23 15 hs</div>
 		</div>
 	</div>
 </div>
@@ -93,7 +94,7 @@
 	}
 
 	.izquierda {
-		@apply grid gap-10;
+		@apply grid gap-1;
 	}
 
 	.datos {
@@ -111,7 +112,8 @@
 		color: var(--verde_oscuro);
 	}
 
-	.datos-lista, .lista div {
+	.datos-lista,
+	.lista div {
 		@apply p-6 pl-8 rounded-xl;
 		background-color: var(--verde_secundario);
 	}
@@ -144,7 +146,6 @@
 
 	.calendario {
 		grid-row: 1/2;
-		background-color: blue;
 	}
 
 	.evento {

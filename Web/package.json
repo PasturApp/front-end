@@ -25,6 +25,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"color-calendar": "^1.0.7"
+		"chartjs": "^0.3.24",
+		"color-calendar": "^1.0.7",
+		"swiper": "^10.3.1"
 	}
 }
