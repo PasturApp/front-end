@@ -55,7 +55,7 @@
 	<!-- Additional required wrapper -->
 	<div class="swiper-wrapper">
 		<!-- Slides -->
-		{#each data.graficas as grafica}
+		{#each ['Pastoreo', 'Tasa de crecimiento', 'Stock', 'Uso del suelo'] as grafica}
 			<div class="swiper-slide">
 				<div class="titulo">
 					<h1>{grafica}</h1>
