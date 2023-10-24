@@ -1,7 +1,6 @@
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
 	// const res = await fetch("...")
-
 	// const data = await res.json()
 
 	const data = [
@@ -20,7 +19,8 @@ export async function load() {
 				{
 					label: 'Potreros',
 					data: [3680, 3500, 2800, 2750, 2200, 1800],
-					borderWidth: 1
+					borderWidth: 1,
+					backgroundColor: ['#0C523B', '#528A3F', '#D3D6C8', '#3F6F37'],
 				}
 			]
 		},
@@ -98,8 +98,8 @@ export async function load() {
 				plugins: {
 					legend: {
 						display: true,
-						position: 'bottom'
-					}
+						position: 'bottom',
+					},
 				}
 			}
 		},

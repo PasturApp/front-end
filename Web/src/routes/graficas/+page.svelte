@@ -1,6 +1,8 @@
 <script>
 	import Chart from 'chart.js/auto';
 	export let data;
+	Chart.defaults.font.family = 'Montserrat';
+	Chart.defaults.font.weight = 'bold';
 
 	// import Swiper bundle with all modules installed
 	import Swiper from 'swiper/bundle';
@@ -39,8 +41,6 @@
 			});
 		});
 	});
-
-	
 </script>
 
 <!-- Slider main container -->
