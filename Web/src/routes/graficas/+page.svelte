@@ -29,25 +29,18 @@
 			}
 		});
 
-		const ctx = document.getElementById('myChart');
+		data.charts.forEach(({ canvaId, type, data, options }) => {
+			const canva = document.getElementById(canvaId);
 
-		new Chart(ctx, {
-			type: 'bar',
-			data: {
-				labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-				datasets: [
-					{
-						label: 'Potreros',
-						data: [12, 19, 3, 5, 2, 3],
-						borderWidth: 1
-					}
-				]
-			},
-			options: {
-				maintainAspectRatio: false
-			}
+			new Chart(canva, {
+				type: type,
+				data: data,
+				options: options
+			});
 		});
 	});
+
+	
 </script>
 
 <!-- Slider main container -->
@@ -55,16 +48,18 @@
 	<!-- Additional required wrapper -->
 	<div class="swiper-wrapper">
 		<!-- Slides -->
-		{#each ['Pastoreo', 'Tasa de crecimiento', 'Stock', 'Uso del suelo'] as grafica}
+		{#each data.charts as grafica}
 			<div class="swiper-slide">
 				<div class="titulo">
-					<h1>{grafica}</h1>
+					<h1>{grafica.title}</h1>
 				</div>
 				<div class="wrapper">
 					<div class="recomendaciones">
 						<h2>Recomendaciones:</h2>
 					</div>
-					<div class="grafica"><canvas id="myChart" /></div>
+					<div class="grafica">
+						<canvas id={grafica.canvaId} />
+					</div>
 				</div>
 			</div>
 		{/each}
@@ -77,7 +72,7 @@
 	<div class="swiper-button-next" />
 </div>
 
-<style lang="css">
+<style lang="postcss">
 	.swiper {
 		@apply max-w-5xl h-fit;
 	}
