@@ -48,7 +48,7 @@
 			}
 		});
 // Uso del suelo
-		const uso = document.getElementById('Uso');
+		const uso = document.getElementById('Uso del suelo');
 
 		new Chart(uso, {
 			type: 'pie',
@@ -80,7 +80,7 @@
 		);
 
 		// Stock
-		const stock = document.getElementById('stock');
+		const stock = document.getElementById('Stock');
 
 		new Chart(stock, {
 			type: 'line',
@@ -103,17 +103,16 @@
 	<!-- Additional required wrapper -->
 	<div class="swiper-wrapper">
 		<!-- Slides -->
-		{#each ['Stock', 'Pastoreo', 'Tasa de crecimiento', 'Uso del suelo'] as grafica}
+		{#each data.charts as grafica}
 			<div class="swiper-slide">
-				<div class="titulo">
-					<h1>{grafica}</h1>
-				</div>
+				<h1 class="titulo">{grafica.title}</h1>
 				<div class="wrapper">
 					<div class="recomendaciones">
 						<h2>Recomendaciones:</h2>
 					</div>
 					<div class="grafica">
-						<canvas id="stock" />
+						<canvas id={grafica.canvaId}/>
+						
 					</div>
 				</div>
 			</div>

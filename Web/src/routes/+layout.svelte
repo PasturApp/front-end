@@ -3,7 +3,7 @@
 	import Navbar from './components/navbar.svelte';
 	import Hamburger from './components/hamburger.svelte';
 
-	export let data; // <--
+	// export let data; // <--
 	let authenticated = true;
 </script>
 
