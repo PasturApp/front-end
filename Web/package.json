@@ -25,7 +25,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"chartjs": "^0.3.24",
+		"chart.js": "^4.4.0",
+		"chartjs-plugin-annotation": "^3.0.1",
 		"color-calendar": "^1.0.7",
 		"swiper": "^10.3.1"
 	}
