@@ -36,7 +36,7 @@
 		</div>
 
 		<button class="sesion" id="sesion" type="submit"
-			><a href="/inicio-sesion">Cerrar Sesión</a></button
+			><a href="/inicio_sesion">Cerrar Sesión</a></button
 		>
 	</form>
 </div>
