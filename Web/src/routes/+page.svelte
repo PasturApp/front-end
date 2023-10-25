@@ -118,6 +118,10 @@
 		background-color: var(--verde_secundario);
 	}
 
+	.datos-lista {
+		@apply h-36;
+	}
+
 	ul {
 		@apply list-disc;
 	}
