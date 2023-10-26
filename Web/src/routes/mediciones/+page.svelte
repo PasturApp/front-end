@@ -1,6 +1,7 @@
 <script>
 	let estados = [];
 	let ops = [];
+	export let data;
 
 	const formatter = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' });
 </script>
@@ -12,9 +13,9 @@
 			<label for="select">Potrero</label><br />
 			<select name="select">
 				<option value="" disabled selected>Seleccionar...</option>
-				<option value="value1">Potrero 1</option>
-				<option value="value2">Potrero 2</option>
-				<option value="value3">Potrero 3</option>
+				{#each data.potreros as potrero}
+					<option value="value1">{potrero}</option>
+				{/each}
 			</select>
 		</div>
 		<div>
