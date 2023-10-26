@@ -5,6 +5,10 @@
 	import 'color-calendar/dist/css/theme-glass.css';
 	import { onMount } from 'svelte';
 
+	export let data;
+	console.log(data);
+	const establecimiento = data.dashboard[0];
+	const plataforma = data.dashboard[1];
 	onMount(() => {
 		new Calendar({
 			theme: 'glass',
@@ -50,10 +54,11 @@
 				</div>
 				<div class="datos-lista">
 					<ul>
-						<li>Última actualización: Septiembre</li>
-						<li>PV: 450</li>
-						<li>Producción individual: 25 lt/VO</li>
-						<li>Carga: 1.25 VO/sep</li>
+						<li>Última actualización: {establecimiento.mes}</li>
+						<li>N° de vacas: {establecimiento.vacas}</li>
+						<li>PV: {establecimiento.pv} kg/VO</li>
+						<li>Producción individual: {establecimiento.produccion} lt/VO</li>
+						<li>Carga: {establecimiento.carga} VO/haSEP</li>
 					</ul>
 				</div>
 			</div>
@@ -63,9 +68,10 @@
 				</div>
 				<div class="datos-lista">
 					<ul>
-						<li>Fecha: 25/09/2023</li>
-						<li>TC: 40 kgMS/ha</li>
-						<li>Stock: 2658 kgMS/ha</li>
+						<li>Fecha: {plataforma.fecha}</li>
+						<li>TC: {plataforma.tc} kgMS/ha</li>
+						<li>Demanda: {plataforma.demanda} kgMS/ha</li>
+						<li>Stock: {plataforma.stock} kgMS/ha</li>
 					</ul>
 				</div>
 			</div>
@@ -114,16 +120,21 @@
 
 	.datos-lista,
 	.lista div {
-		@apply p-6 pl-8 rounded-xl;
+		@apply pl-8 rounded-xl;
 		background-color: var(--verde_secundario);
 	}
 
+	.lista div {
+		@apply p-4;
+	}
+
 	.datos-lista {
-		@apply h-36;
+		@apply h-40;
+		line-height: 150px;
 	}
 
 	ul {
-		@apply list-disc;
+		@apply list-disc inline-block align-middle leading-normal;
 	}
 
 	li {
