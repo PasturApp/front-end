@@ -1,5 +1,4 @@
 <script>
-	import Navbar from '../components/navbar.svelte';
 	let metodos = [];
 
 	const formatter = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' });
@@ -8,6 +7,10 @@
 <div>
 	<h1>Datos del establecimiento</h1>
 	<form>
+		<div>
+			<label for="mes">Fecha</label><br />
+			<input type="month" id="mes" name="mes" />
+		</div>
 		<div class="vacas">
 			<label for="vacas">N° de Vacas en Ordeñe</label><br />
 			<input type="text" id="vacas" name="vacas" />
@@ -31,10 +34,8 @@
 			{/each}
 		</div>
 		<div class="stock">
-			<div>
-				<label for="stock">Stock objetivo(kg/ha)</label>
-				<input type="text" id="disponibiliad" name="disponibiliad" value="2000" />
-			</div>
+			<label for="stock">Stock objetivo(kg/ha)</label>
+			<input type="text" id="disponibiliad" name="disponibiliad" value="2500" />
 		</div>
 
 		<button type="submit">Ingresar</button>
