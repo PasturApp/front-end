@@ -17,9 +17,9 @@
 <Tabs {activeItem} {items} on:tabChange={tabChange} />
 
 {#if activeItem === 'Plataforma'}
-	<Plataforma plataforma={data.plataform} />
+	<Plataforma plataforma={data.plataforma} />
 {:else if activeItem === 'Stock'}
-	<Stock />
+	<Stock stock={data.stock} />
 {:else if activeItem === 'Tasa de crecimiento'}
-	<Tasa_crecimiento />
+	<Tasa_crecimiento tasa_crecimiento={data.tasa_crecimiento} />
 {/if}
