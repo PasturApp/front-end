@@ -1,5 +1,6 @@
 <script>
 	import Chart from 'chart.js/auto';
+	import Recommendations from '../components/recommendations.svelte';
 	export let data;
 	Chart.defaults.font.family = 'Montserrat';
 	Chart.defaults.font.weight = 'bold';
@@ -54,12 +55,15 @@
 					<h1>{grafica.title}</h1>
 				</div>
 				<div class="wrapper">
-					<div class="recomendaciones">
-						<h2>Recomendaciones:</h2>
-					</div>
 					<div class="grafica">
 						<canvas id={grafica.canvaId} />
 					</div>
+					{#if grafica.title === 'Stock' || grafica.title === 'Pastoreo'}
+						<div class="recomendaciones">
+							<h2>Recomendaciones:</h2>
+							<Recommendations {grafica} />
+						</div>
+					{/if}
 				</div>
 			</div>
 		{/each}
@@ -74,7 +78,7 @@
 
 <style lang="postcss">
 	.swiper {
-		@apply max-w-5xl h-fit;
+		@apply max-w-5xl h-full pt-6;
 	}
 
 	.titulo {
@@ -82,7 +86,7 @@
 	}
 
 	.wrapper {
-		@apply flex flex-row justify-center gap-5;
+		@apply flex flex-col justify-center items-center gap-2;
 	}
 
 	h1 {
@@ -94,8 +98,14 @@
 	}
 
 	.recomendaciones {
-		@apply mt-4 pt-4 h-auto w-80 text-center rounded-xl;
+		@apply mt-4 p-4 px-7 h-fit w-1/2 text-center rounded-xl;
 		background-color: var(--verde_fondos);
+	}
+
+	h2 {
+		@apply inline pr-2 text-lg;
+		font-family: var(--letra_titulo);
+		color: var(--verde_primario);
 	}
 
 	.grafica {
