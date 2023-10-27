@@ -6,7 +6,7 @@
 	<h1>Exportar datos</h1>
 
 	<form>
-		{#each ['Mediciones', 'Pastoreo', 'Stock', 'Tasa de crecimiento'] as opciones}
+		{#each ['Plataforma', 'Stock', 'Tasa de crecimiento'] as opciones}
 			<div class="opciones">
 				<input type="checkbox" value={opciones} bind:group={exportados} />
 				<label class="opciones" for="opciones">{opciones}</label>
