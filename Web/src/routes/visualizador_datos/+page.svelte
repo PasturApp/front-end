@@ -1,6 +1,14 @@
 <script>
-	export let data;
+	import Tabs from '../components/tabs.svelte';
+	
+	// tabs
+	let items = ['Plataforma', 'Stock', 'Tasa de crecimiento'];
+	let activeItem = 'Plataforma';
+	const tabChange = (e) => {
+		activeItem = e.detail;
+	}
 
+	export let data;
 	const plataforma = data.plataform;
 	let potrero = '';
 	let fecha = '';
@@ -10,19 +18,17 @@
 
 	$: tableData = plataforma.filter(
 		(item) =>
-			item.potrero.toLocaleLowerCase().includes(potrero.toLocaleLowerCase()) &&
-			item.fecha.includes(fecha) &&
+		item.potrero.toLocaleLowerCase().includes(potrero.toLocaleLowerCase()) &&
+		item.fecha.includes(fecha) &&
 			item.estado.toLocaleLowerCase().includes(estado.toLocaleLowerCase()) &&
 			item.pastoreo.toLocaleLowerCase().includes(pastoreo.toLocaleLowerCase()) &&
 			item.disponibilidad.toString().includes(disponibilidad)
 	);
-</script>
 
-<div class="buttons">
-	<button id="plataforma">Plataforma</button>
-	<button id="stock">Stock</button>
-	<button id="tc">Tasa de crecimiento</button>
-</div>
+</script>
+<Tabs {activeItem} {items} on:tabChange={tabChange}/>
+
+{#if activeItem === 'Plataforma'}	
 <div>
 	<table>
 		<tr>
@@ -50,15 +56,10 @@
 		{/each}
 	</table>
 </div>
+{/if}
+
 
 <style lang="css">
-	button {
-		@apply border-2 border-solid rounded-2xl px-5 m-2;
-		border-color: var(--verde_primario);
-		font-family: var(--letra_titulo);
-		color: var(--verde_primario);
-	}
-
 	input[type='text'] {
 		@apply rounded-lg;
 		color: black;
@@ -118,3 +119,4 @@
 		@apply rounded-br-md;
 	}
 </style>
+
