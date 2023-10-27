@@ -154,8 +154,7 @@
 		color: var(--verde_oscuro);
 	}
 
-	.datos-lista,
-	.lista div {
+	.datos-lista {
 		@apply pl-8 rounded-xl;
 		background-color: var(--verde_secundario);
 	}
@@ -212,7 +211,7 @@
 	}
 
 	.container::-webkit-scrollbar {
-		width: 10px;
+		width: 12px;
 		height: 115px;
 	}
 	.container::-webkit-scrollbar-button {
@@ -224,6 +223,7 @@
 		background: var(--verde_oscuro);
 		border: 0px none #ffffff;
 		border-radius: 50px;
+		height: auto;
 	}
 	.container::-webkit-scrollbar-thumb:hover {
 		background: var(--verde_primario);
@@ -232,15 +232,16 @@
 		background: var(--verde_secundario);
 	}
 	.container::-webkit-scrollbar-track {
-		background: #666666;
+		background:transparent;
 		border: 0px none #ffffff;
 		border-radius: 50px;
+		height: auto;
 	}
 	.container::-webkit-scrollbar-track:hover {
-		background: #666666;
+		background:transparent;
 	}
 	.container::-webkit-scrollbar-track:active {
-		background: #333333;
+		background:transparent;
 	}
 	.container::-webkit-scrollbar-corner {
 		background: transparent;
@@ -251,7 +252,7 @@
 		box-shadow: none;
 		text-decoration: none;
 		font-size: 1.2rem;
-		border-bottom: 1px solid black;
+		border-bottom: 1px solid var(--verde_oscuro);
 		margin-top: 15px;
 		outline: none;
 		width: 500px;
