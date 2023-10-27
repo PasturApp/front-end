@@ -20,7 +20,7 @@ export async function load() {
 					label: 'Potreros',
 					data: [3680, 3500, 2800, 2750, 2200, 1800],
 					borderWidth: 1,
-					backgroundColor: ['#0C523B', '#528A3F', '#D3D6C8', '#3F6F37'],
+					backgroundColor: ['#0C523B'],
 				}
 			]
 		},
@@ -65,12 +65,20 @@ export async function load() {
 						tension: 0.35
 					},
 					{
-						label: 'Objetivo',
-						data: [2500, 2500, 2500, 2500, 2500],
+						label: 'Rango obj. min',
+						data: [2750, 2750, 2750, 2750, 2750],
 						borderColor: '#CFE7D1',
 						backgroundColor: '#CFE7D1',
-						borderWidth: 35,
-						pointRadius: 0
+						pointRadius: 0,
+						fill: 1
+					},
+					{
+						label: 'Rango obj. max',
+						data: [2250, 2250, 2250, 2250, 2250],
+						borderColor: '#CFE7D1',
+						backgroundColor: '#CFE7D1',
+						pointRadius: 0,
+						fill: 1
 					}
 				]
 			},
@@ -160,7 +168,7 @@ export async function load() {
 				plugins: {
 					legend: {
 						display: true,
-						position: 'bottom'
+						position: 'bottom',
 					}
 				}
 			}
@@ -191,6 +199,11 @@ export async function load() {
 			}
 		}
 	];
+
+	charts[0].data.datasets[1].legend = {
+		display: false, // Hide the legend for Dataset 2
+	};
+
 
 	return {
 		charts
