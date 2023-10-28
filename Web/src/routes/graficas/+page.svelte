@@ -19,6 +19,7 @@
 		swiper = new Swiper('.swiper', {
 			// Optional parameters
 			loop: true,
+			autoHeight: true,
 
 			// If we need pagination
 			pagination: {
@@ -70,7 +71,7 @@
 	</div>
 	<!-- If we need pagination -->
 	<div class="swiper-pagination" />
-
+	
 	<!-- If we need navigation buttons -->
 	<div class="swiper-button-prev" />
 	<div class="swiper-button-next" />
@@ -78,7 +79,7 @@
 
 <style lang="postcss">
 	.swiper {
-		@apply max-w-5xl h-full pt-6;
+		@apply max-w-5xl pb-7;
 	}
 
 	.titulo {
@@ -90,7 +91,7 @@
 	}
 
 	h1 {
-		@apply rounded-2xl px-20 py-2 text-center text-xl font-semibold;
+		@apply rounded-2xl w-1/3 py-2 text-center text-xl font-semibold;
 
 		background-color: var(--verde_secundario);
 		font-family: var(--letra_titulo);
@@ -98,14 +99,15 @@
 	}
 
 	.recomendaciones {
-		@apply mt-4 p-4 px-7 h-fit w-1/2 text-center rounded-xl;
+		@apply mt-2 px-5 py-3 h-fit w-1/2 rounded-xl text-justify;
 		background-color: var(--verde_fondos);
+
 	}
 
 	h2 {
-		@apply inline pr-2 text-lg;
+		@apply inline text-base;
 		font-family: var(--letra_titulo);
-		color: var(--verde_primario);
+		color: var(--verde_secundario);
 	}
 
 	.grafica {

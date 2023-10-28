@@ -25,17 +25,31 @@
 			potrero cumple con la condición.
 		</p>
 	{:else}
-		<p>Esperar para ingresar a pastorear,</p>
+		<p>Esperar para ingresar a pastorear.</p>
 	{/if}
+	<div class="lluvias">
+		<img src="../images/luz.png" alt="lamparita" height="23px" width="23px">
+		<p >En caso de lluvias intensas revisar que el potrero esté firme para preservar la vida útil de la pastura.</p>
+	</div>
 {/if}
 
 <style>
 	p {
-		@apply inline;
-		font-size: 15px;
+		@apply inline text-sm;
 	}
 
 	span {
 		@apply italic;
+	}
+
+	.lluvias {
+		@apply text-xs pt-2;
+	}
+
+	.lluvias p {
+		@apply text-xs;
+	}
+	img {
+		@apply inline;
 	}
 </style>
