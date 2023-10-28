@@ -1,5 +1,6 @@
 <script>
-	import test from '../api/auth/test.json';
+	export let data;
+	const potreros = data.potreros;
 </script>
 
 <div>
@@ -28,10 +29,10 @@
 				<th>Potrero</th>
 				<th>Área (ha)</th>
 			</tr>
-			{#each test as dato}
+			{#each potreros as potrero}
 				<tr>
-					<td>{dato.Potrero}</td>
-					<td>{dato.Area}</td>
+					<td>{potrero.potrero}</td>
+					<td>{potrero.area}</td>
 				</tr>
 			{/each}
 		</table>
