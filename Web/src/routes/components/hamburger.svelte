@@ -7,7 +7,7 @@
 
 	const opciones = [
 		{
-			name: 'Home',
+			name: 'Inicio',
 			link: '/'
 		},
 		{
