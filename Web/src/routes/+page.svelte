@@ -103,7 +103,6 @@
 						<span class={`todo__text ${item.completed ? 'todo__checked--strike' : ''}`}
 							>{item.task}</span
 						>
-
 						<div class="icons">
 							<button class="icon__button" on:click={() => (item.completed = !item.completed)}>
 								<Icons name="check-mark" class="icon" />
@@ -131,21 +130,20 @@
 
 <style lang="postcss">
 	.wrapper {
-		@apply grid gap-3;
+		@apply mt-14 w-full md:mt-0 md:w-3/4 lg:w-full lg:grid lg:gap-3;
 		grid-template-columns: 2fr 1fr;
 	}
 
 	.izquierda {
-		@apply grid gap-1;
+		@apply lg:grid lg:gap-1;
 	}
 
 	.datos {
-		@apply grid gap-3;
-		grid-row: 1/2;
+		@apply w-full lg:grid lg:gap-3 lg:row-start-1 lg:row-end-2;
 	}
 
 	.establecimiento {
-		grid-column: 1/2;
+		@apply lg:col-start-1 lg:col-end-2;
 	}
 
 	h1 {
@@ -160,8 +158,7 @@
 	}
 
 	.container div {
-		@apply p-4;
-		grid-row: 2/3;
+		@apply p-4 lg:row-start-2 lg:row-end-3;
 	}
 
 	.datos-lista {
@@ -179,19 +176,20 @@
 	}
 
 	.plataforma {
-		grid-column: 2/3;
+		@apply lg:col-start-2 lg:col-end-3;
 	}
 
 	.derecha {
-		@apply grid gap-3;
+		@apply lg:grid gap-3;
 	}
 
 	.calendario {
-		grid-row: 1/2;
+		@apply hidden;
+		@apply lg:block lg:row-start-1 lg:row-end-2;
 	}
 
 	.evento {
-		grid-row: 2/3;
+		@apply w-full xl:w-96 lg:row-start-2 lg:row-end-3;
 	}
 
 	.fecha {
@@ -206,8 +204,7 @@
 	}
 
 	.container {
-		@apply h-96;
-		overflow-y: scroll;
+		@apply h-60 md:h-96 overflow-y-scroll;
 	}
 
 	.container::-webkit-scrollbar {
@@ -232,21 +229,22 @@
 		background: var(--verde_secundario);
 	}
 	.container::-webkit-scrollbar-track {
-		background:transparent;
+		background: transparent;
 		border: 0px none #ffffff;
 		border-radius: 50px;
 		height: auto;
 	}
 	.container::-webkit-scrollbar-track:hover {
-		background:transparent;
+		background: transparent;
 	}
 	.container::-webkit-scrollbar-track:active {
-		background:transparent;
+		background: transparent;
 	}
 	.container::-webkit-scrollbar-corner {
 		background: transparent;
 	}
 	.todos__input {
+		@apply w-2/3;
 		background-color: inherit;
 		border: none;
 		box-shadow: none;
@@ -255,7 +253,6 @@
 		border-bottom: 1px solid var(--verde_oscuro);
 		margin-top: 15px;
 		outline: none;
-		width: 500px;
 	}
 	.todos__button {
 		background-color: inherit;
