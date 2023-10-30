@@ -23,18 +23,6 @@
 			link: '/datos_establecimiento'
 		},
 		{
-			name: 'Gráficas',
-			link: '/graficas'
-		},
-		{
-			name: 'Visualizador de datos',
-			link: '/visualizador_datos'
-		},
-		{
-			name: 'Exportar',
-			link: '/exportar'
-		},
-		{
 			name: 'Cuenta',
 			link: '/cuenta'
 		}
