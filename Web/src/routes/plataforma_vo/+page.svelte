@@ -8,12 +8,12 @@
 	<div class="one">
 		<form>
 			<div class="potrero">
-				<label for="potrero">Potrero</label><br />
+				<label for="potrero">Potrero</label>
 				<input type="text" id="potrero" name="potrero" />
 			</div>
 
 			<div class="area">
-				<label for="area">Área (ha)</label><br />
+				<label for="area">Área (ha)</label>
 				<input type="text" id="area" name="area" />
 			</div>
 
@@ -36,13 +36,19 @@
 				</tr>
 			{/each}
 		</table>
-		<div class="modificar-div">
-			<button class="modificar">Modificar</button>
-		</div>
+	</div>
+	<div class="modificar-div">
+		<button class="modificar">Modificar</button>
 	</div>
 </div>
 
 <style lang="css">
+	div {
+		@apply flex flex-col align-middle;
+	}
+	div.one {
+		@apply flex align-middle items-center;
+	}
 	form {
 		@apply mt-4 flex flex-col gap-2 max-w-xs;
 	}
@@ -64,7 +70,8 @@
 	}
 
 	.modificar-div {
-		@apply text-right;
+		@apply text-center align-middle items-center hidden;
+		@apply md:block;
 	}
 
 	.datos {
@@ -103,7 +110,7 @@
 	}
 
 	table {
-		@apply mt-4 border-separate border-spacing-0;
+		@apply border-separate border-spacing-0;
 		min-width: 350px;
 	}
 
@@ -157,7 +164,42 @@
 	}
 
 	.two {
-		@apply hidden;
+		@apply hidden overflow-y-scroll h-60 mt-4;
 		@apply md:block md:float-right;
+	}
+	.two::-webkit-scrollbar {
+		width: 12px;
+		height: 115px;
+	}
+	.two::-webkit-scrollbar-button {
+		width: 0px;
+		height: 0px;
+	}
+	.two::-webkit-scrollbar-thumb {
+		background: var(--verde_oscuro);
+		border: 0px none #ffffff;
+		border-radius: 50px;
+		height: auto;
+	}
+	.two::-webkit-scrollbar-thumb:hover {
+		background: var(--verde_primario);
+	}
+	.two::-webkit-scrollbar-thumb:active {
+		background: var(--verde_secundario);
+	}
+	.two::-webkit-scrollbar-track {
+		background: transparent;
+		border: 0px none #ffffff;
+		border-radius: 50px;
+		height: auto;
+	}
+	.two::-webkit-scrollbar-track:hover {
+		background: transparent;
+	}
+	.two::-webkit-scrollbar-track:active {
+		background: transparent;
+	}
+	.two::-webkit-scrollbar-corner {
+		background: transparent;
 	}
 </style>
