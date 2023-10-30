@@ -18,7 +18,6 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-	
 </svelte:head>
 
 <div class:user-in={authenticated}>
@@ -37,7 +36,7 @@
 	}
 
 	.main {
-		@apply min-h-screen w-full p-4 grid place-items-center;
+		@apply min-h-screen w-full p-2 grid place-items-center;
 	}
 
 	:global(.navbar):hover .main {

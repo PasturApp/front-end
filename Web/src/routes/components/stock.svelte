@@ -48,7 +48,7 @@
 	}
 
 	table {
-		@apply mt-4 border-separate border-spacing-0 text-center;
+		@apply mt-4 border-separate border-spacing-0 text-center mr-3;
 		min-width: 350px;
 		color: var(--verde_oscuro);
 	}
