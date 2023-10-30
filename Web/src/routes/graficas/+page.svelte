@@ -79,7 +79,7 @@
 
 <style lang="postcss">
 	.swiper {
-		@apply max-w-5xl pb-7;
+		@apply md:max-w-2xl lg:max-w-5xl pb-7;
 	}
 
 	.titulo {
@@ -99,7 +99,7 @@
 	}
 
 	.recomendaciones {
-		@apply mt-2 px-5 py-3 h-fit w-1/2 rounded-xl text-justify;
+		@apply mt-2 px-5 py-3 h-fit rounded-xl w-2/3 text-justify;
 		background-color: var(--verde_fondos);
 
 	}
@@ -111,7 +111,7 @@
 	}
 
 	.grafica {
-		@apply mt-4 pt-4 h-96 w-2/4 p-5 rounded-xl;
+		@apply mt-4 pt-4 h-96 w-2/3 p-5 rounded-xl;
 		background-color: var(--verde_fondos);
 	}
 
