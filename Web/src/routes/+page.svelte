@@ -134,7 +134,7 @@
 					<ul>
 						<li>Fecha: {spanishDate}</li>
 						<li>TC: 1320 kgMS/ha</li>
-						<li>Demanda: {plataformal[1]} kgMS/ha</li>
+						<li>Demanda: {plataforma[1]} kgMS/ha</li>
 						<li>Stock: {plataforma[1]} kgMS/ha</li>
 					</ul>
 				</div>

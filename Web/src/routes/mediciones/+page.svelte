@@ -14,7 +14,7 @@
 			<select name="select">
 				<option value="" disabled selected>Seleccionar...</option>
 				{#each data.potreros as potrero}
-					<option value="value1">{potrero}</option>
+					<option value="value1">{potrero[0]}</option>
 				{/each}
 			</select>
 		</div>
