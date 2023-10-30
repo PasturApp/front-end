@@ -125,9 +125,33 @@ export async function load() {
 				]
 			},
 			options: {
+				scales: {
+					y: {
+						grid: {
+							display: false
+						},
+						title: {
+							display: true,
+							text: 'kgMS/ha'
+						},
+						min: 0,
+						max: 3500
+					},
+					x: {
+						grid: {
+							display: false
+						}
+					}
+				},
 				responsive: true,
-				maintainAspectRatio: false
-			}
+				maintainAspectRatio: false,
+				plugins: {
+					legend: {
+						display: true,
+						position: 'bottom',
+					}
+				}
+			},
 		},
 		{
 			title: 'Tasa de crecimiento',
