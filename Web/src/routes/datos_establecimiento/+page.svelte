@@ -9,7 +9,7 @@
 	<form>
 		<div>
 			<label for="mes">Fecha</label><br />
-			<input type="month" id="mes" name="mes" />
+			<input type="date" id="mes" name="mes" />
 		</div>
 		<div class="vacas">
 			<label for="vacas">N° de Vacas en Ordeñe</label><br />
