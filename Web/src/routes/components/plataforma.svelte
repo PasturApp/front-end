@@ -46,6 +46,9 @@
 </div>
 
 <style lang="css">
+	div {
+		@apply max-w-2xl lg:max-w-full overflow-x-scroll;
+	}
 	input[type='text'] {
 		@apply rounded-lg pl-2;
 		color: var(--verde_oscuro);
@@ -62,8 +65,7 @@
 	}
 
 	table {
-		@apply mt-4 border-separate border-spacing-0 text-center;
-		min-width: 350px;
+		@apply mt-4 border-separate border-spacing-0 text-center w-full mb-3;
 		color: var(--verde_oscuro);
 	}
 
@@ -108,5 +110,40 @@
 	/* bottom-right border-radius */
 	table tr:last-child td:last-child {
 		@apply rounded-br-md;
+	}
+	div::-webkit-scrollbar {
+		width: 12px;
+		height: 15px;
+	}
+	div::-webkit-scrollbar-button {
+		width: 0px;
+		height: 0px;
+	}
+	div::-webkit-scrollbar-thumb {
+		background: var(--verde_oscuro);
+		border: 0px none #ffffff;
+		border-radius: 50px;
+		height: auto;
+	}
+	div::-webkit-scrollbar-thumb:hover {
+		background: var(--verde_primario);
+	}
+	div::-webkit-scrollbar-thumb:active {
+		background: var(--verde_secundario);
+	}
+	div::-webkit-scrollbar-track {
+		background: transparent;
+		border: 0px none #ffffff;
+		border-radius: 50px;
+		height: auto;
+	}
+	div::-webkit-scrollbar-track:hover {
+		background: transparent;
+	}
+	div::-webkit-scrollbar-track:active {
+		background: transparent;
+	}
+	div::-webkit-scrollbar-corner {
+		background: transparent;
 	}
 </style>

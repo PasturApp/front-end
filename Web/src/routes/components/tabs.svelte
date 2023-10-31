@@ -17,7 +17,7 @@
 
 <style lang="css">
 li {
-    @apply border-2 border-solid rounded-2xl mx-4 w-56 text-center cursor-pointer;
+    @apply border-2 border-solid rounded-2xl mx-4 w-48 lg:w-56 text-center cursor-pointer;
     border-color: var(--verde_primario);
     font-family: var(--letra_titulo);
     color: var(--verde_primario);
