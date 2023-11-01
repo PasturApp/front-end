@@ -91,7 +91,7 @@
 			</div>
 		</div>
 
-		<button type="submit" on:click|preventDefault={debugFormData}>Ingresar</button>
+		<button type="submit">Ingresar</button>
 	</form>
 </div>
 
