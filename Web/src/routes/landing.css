@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+	@apply scroll-smooth;
+	font-size: 62.5%;
+}
+
+*,
+*::before,
+*::after {
+	@apply box-border m-0 p-0;
+}
+
+@media only screen and (max-width: 37.5em) {
+	html {
+		font-size: 40%;
+	}
+}
+
+@media only screen and (max-width: 56.25em) {
+	html {
+		font-size: 50%;
+	}
+}
+
+@media only screen and (max-width: 75em) {
+	html {
+		font-size: 56.25%;
+	}
+}
+
+@media only screen and (min-width: 75em) {
+	html {
+		font-size: 100%;
+	}
+}
+
+:root {
+	--primary-green: #528a3f;
+	--secondary-green: #3f6f37;
+	--dark-green: #0c523b;
+	--cream: #d3d8bd;
+	--green-background: #e9f7ec;
+	--white-background: #f5fffa;
+	--font-brand: 'Comfortaa', sans-serif;
+	--font-header: 'Poppins', sans-serif;
+	--font-family: 'Montserrat', sans-serif;
+}
+
+.heading {
+	@apply text-3xl text-center font-bold max-w-sm md:max-w-4xl leading-relaxed sm:text-4xl sm:max-w-4xl md:text-5xl lg:text-6xl lg:max-w-6xl xl:text-5xl mb-10;
+	font-family: var(--font-header);
+	color: var(--secondary-green);
+}
+
+.default-text {
+	@apply text-base max-w-sm md:max-w-4xl leading-relaxed sm:max-w-4xl md:text-2xl lg:text-3xl lg:max-w-6xl xl:text-2xl mb-5;
+	font-family: var(--font-family);
+	color: var(--dark-green);
+}
+
+.scrolled {
+	background-color: var(--secondary-green);
+	transition: background-color 0.3s ease-in;
+}
+
+.hidden {
+	@apply invisible;
+}
+
+.animation {
+	animation: slidein 1s cubic-bezier(0, 1, 0.89, 1);
+}
+
+@keyframes slidein {
+	from {
+		left: -100%;
+	}
+
+	to {
+		left: 0;
+	}
+}
