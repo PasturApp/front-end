@@ -1,33 +1,75 @@
 <script>
-	let estados = [];
-	let ops = [];
+	import { onMount } from 'svelte';
+  	import { writable } from 'svelte/store'
 	export let data;
 
 	const formatter = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' });
+	const potrero = writable('');
+  	const fecha = writable('');
+  	const selectedEstado = writable('');
+  	const enPastoreo = writable('');
+  	const disponibilidad = writable('');
+	const sendData = async () => {
+    const formData = {
+      nombre_potrero: $potrero,
+      medi_state: $selectedEstado,
+      pastoreo: $enPastoreo === 'Si' ? 1 : 0,
+      availability: $disponibilidad,
+      date: $fecha
+    };
+	
+
+    try {
+      const res = await fetch('http://localhost:5000/api/insertar/mediciones', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (res.ok) {
+        const response = await res.json();
+        console.log(response);
+      } else {
+        throw new Error('Failed to send data');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const debugFormData = () => {
+    console.log('Datos del formulario:');
+    console.log('Potrero:', $potrero);
+    console.log('Fecha:', $fecha);
+    console.log('Estados:', $selectedEstado);
+    console.log('Ops:', $enPastoreo);
+    console.log('Disponibilidad:', $disponibilidad);
+  	};
 </script>
 
 <div>
 	<h1>Mediciones</h1>
-	<form>
+	<form on:submit|preventDefault={sendData}>
 		<div class="Potrero">
 			<label for="select">Potrero</label><br />
-			<select name="select">
+			<select bind:value={$potrero}>
 				<option value="" disabled selected>Seleccionar...</option>
 				{#each data.potreros as potrero}
-					<option value="value1">{potrero[0]}</option>
+					<option value={potrero[0]}>{potrero[0]}</option>
 				{/each}
 			</select>
 		</div>
 		<div>
 			<label for="Fecha">Fecha</label><br />
-			<input type="date" id="Fecha" name="Fecha" />
+			<input type="date" bind:value={$fecha} />
 		</div>
 		<div>
 			<h2>Estado</h2>
 
 			{#each ['Pastoreo', 'Remanente', 'Reserva', 'Barbecho'] as estado}
 				<div class="opciones">
-					<input type="radio" value={estado} bind:group={estados} />
+					<input type="radio" value={estado} bind:group={$selectedEstado} />
 					<label class="opciones" for="estado">{estado}</label>
 				</div>
 			{/each}
@@ -37,7 +79,7 @@
 
 			{#each ['Si', 'No'] as opciones}
 				<label class="opciones" for="opciones">
-					<input type="radio" value={opciones} bind:group={ops} />
+					<input type="radio" value={opciones} bind:group={$enPastoreo} />
 					{opciones}
 				</label>
 			{/each}
@@ -45,11 +87,11 @@
 		<div class="Disponibilidad">
 			<div>
 				<label for="disponibilidad">Disponibilidad (kg/ha)</label>
-				<input type="text" id="disponibiliad" name="disponibiliad" />
+				<input type="text" id="disponibiliad" bind:value={$disponibilidad} />
 			</div>
 		</div>
 
-		<button type="submit">Ingresar</button>
+		<button type="submit" on:click|preventDefault={debugFormData}>Ingresar</button>
 	</form>
 </div>
 
