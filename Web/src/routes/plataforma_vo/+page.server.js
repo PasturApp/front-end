@@ -1,51 +1,12 @@
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
-	const potreros = [
-		{
-			potrero: '1D',
-			area: 3
-		},
-		{
-			potrero: '1A',
-			area: 6
-		},
-		{
-			potrero: '2F',
-			area: 4.5
-		},
-		{
-			potrero: '1D',
-			area: 3
-		},
-		{
-			potrero: '1A',
-			area: 6
-		},
-		{
-			potrero: '2F',
-			area: 4.5
-		},
-		{
-			potrero: '1A',
-			area: 6
-		},
-		{
-			potrero: '2F',
-			area: 4.5
-		},
-		{
-			potrero: '1D',
-			area: 3
-		},
-		{
-			potrero: '1A',
-			area: 6
-		},
-		{
-			potrero: '2F',
-			area: 4.5
-		}
-	];
-
-	return { potreros };
+	try {
+		const response = await fetch("http://localhost:5000/api/pasture_table");
+		const potreros = await response.json();
+		console.log(potreros);
+		return { potreros };
+	} catch (error) {
+		console.error('Error fetching data:', error);
+		return { potreros };
+	}
 }

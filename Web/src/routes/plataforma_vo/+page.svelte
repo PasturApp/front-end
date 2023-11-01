@@ -1,6 +1,6 @@
 <script>
 	export let data;
-	const potreros = data.potreros;
+	console.log(data.potreros[0], data.potreros[1]);
 </script>
 
 <div>
@@ -29,10 +29,10 @@
 				<th>Potrero</th>
 				<th>Área (ha)</th>
 			</tr>
-			{#each potreros as potrero}
+			{#each data.potreros as potrero}
 				<tr>
-					<td>{potrero.potrero}</td>
-					<td>{potrero.area}</td>
+					<td>{potrero[0]}</td>
+					<td>{potrero[1]}</td>
 				</tr>
 			{/each}
 		</table>
