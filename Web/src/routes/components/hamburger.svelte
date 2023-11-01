@@ -55,7 +55,7 @@
 	}
 
 	.menu-button {
-		@apply absolute right-5 top-8 text-center h-10 w-10;
+		@apply fixed right-5 top-8 text-center h-10 w-10;
 		z-index: 2;
 		line-height: 50px;
 		transition: all 0.3s ease;
