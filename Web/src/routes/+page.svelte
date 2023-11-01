@@ -8,9 +8,63 @@
 
 	export let data;
 	console.log(data);
-	const establecimiento = data.dashboard[0];
-	const plataforma = data.dashboard[1];
-	onMount(() => {
+	const establecimiento = data.dashboardEstable;
+	const plataforma = data.dashboardPlat;
+	// Estable dashboard date modi
+	const estable_fechaCompleta = establecimiento[0];
+	const estable_fechaObj = new Date(estable_fechaCompleta);
+	const estable_mes = estable_fechaObj.getMonth();
+	const estable_nombresMeses = [
+		'Enero',
+		'Febrero',
+		'Marzo',
+		'Abril',
+		'Mayo',
+		'Junio',
+		'Julio',
+		'Agosto',
+		'Septiembre',
+		'Octubre',
+		'Noviembre',
+		'Diciembre'
+	];
+	const estable_nombreMes = estable_nombresMeses[estable_mes];
+
+	//PP dashboard date modi
+	const dateStr = plataforma[0];
+	const englishMonths = [
+		'Jan',
+		'Feb',
+		'Mar',
+		'Apr',
+		'May',
+		'Jun',
+		'Jul',
+		'Aug',
+		'Sep',
+		'Oct',
+		'Nov',
+		'Dec'
+	];
+	const spanishMonths = [
+		'Ene',
+		'Feb',
+		'Mar',
+		'Abr',
+		'May',
+		'Jun',
+		'Jul',
+		'Ago',
+		'Sep',
+		'Oct',
+		'Nov',
+		'Dic'
+	];
+	const dateComponents = dateStr.split(' '); // Separar la cadena por espacios
+	const monthIndex = englishMonths.indexOf(dateComponents[2]); // Encontrar el índice del mes en inglés
+	const spanishMonth = spanishMonths[monthIndex]; // Obtener el mes en español
+	const spanishDate = `${dateComponents[1]} ${spanishMonth} ${dateComponents[3]}`;
+	onMount(async () => {
 		new Calendar({
 			theme: 'glass',
 			id: '#color-calendar',
@@ -64,11 +118,11 @@
 				</div>
 				<div class="datos-lista">
 					<ul>
-						<li>Última actualización: {establecimiento.mes}</li>
-						<li>N° de vacas: {establecimiento.vacas}</li>
-						<li>PV: {establecimiento.pv} kg/VO</li>
-						<li>Producción individual: {establecimiento.produccion} lt/VO</li>
-						<li>Carga: {establecimiento.carga} VO/haSEP</li>
+						<li>Última actualización: {estable_nombreMes}</li>
+						<li>N° de vacas: {establecimiento[1]}</li>
+						<li>PV: {establecimiento[2]} kg/VO</li>
+						<li>Producción individual: {establecimiento[3]} lt/VO</li>
+						<li>Carga: {establecimiento[4]} VO/haSEP</li>
 					</ul>
 				</div>
 			</div>
@@ -78,10 +132,10 @@
 				</div>
 				<div class="datos-lista">
 					<ul>
-						<li>Fecha: {plataforma.fecha}</li>
-						<li>TC: {plataforma.tc} kgMS/ha</li>
-						<li>Demanda: {plataforma.demanda} kgMS/ha</li>
-						<li>Stock: {plataforma.stock} kgMS/ha</li>
+						<li>Fecha: {spanishDate}</li>
+						<li>TC: 1320 kgMS/ha</li>
+						<li>Demanda: {plataforma[1]} kgMS/ha</li>
+						<li>Stock: {plataforma[1]} kgMS/ha</li>
 					</ul>
 				</div>
 			</div>
