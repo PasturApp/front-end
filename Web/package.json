@@ -25,6 +25,11 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"typed.js": "^2.0.16"
+		"typed.js": "^2.0.16",
+		"chart.js": "^4.4.0",
+		"chartjs-plugin-annotation": "^3.0.1",
+		"color-calendar": "^1.0.7",
+		"date-fns": "^2.30.0",
+		"swiper": "^10.3.1"
 	}
 }

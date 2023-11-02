@@ -1,5 +1,6 @@
 <script>
-	import Navbar from '../components/navbar.svelte';
+	export let data;
+	const usuario = data.usuario;
 </script>
 
 <div>
@@ -7,22 +8,22 @@
 	<form>
 		<div class="nombre">
 			<label for="nombre">Nombre</label><br />
-			<input type="text" id="nombre" name="nombre" />
+			<input type="text" id="nombre" name="nombre" value={usuario.nombre} />
 		</div>
 
 		<div class="apellido">
 			<label for="apellido">Apellido</label><br />
-			<input type="text" id="apellido" name="apellido" />
+			<input type="text" id="apellido" name="apellido" value={usuario.apellido} />
 		</div>
 
 		<div>
 			<label for="email">Email</label><br />
-			<input type="text" id="email" name="email" placeholder="email@ejemplo.com" />
+			<input type="text" id="email" name="email" value={usuario.email} />
 		</div>
 
 		<div>
 			<label for="celular">Celular</label><br />
-			<input type="int" id="celular" name="celular" value="+598" />
+			<input type="int" id="celular" name="celular" value="+598 {usuario.celular}" />
 		</div>
 
 		<button class="mod" type="submit">Modificar</button>
@@ -30,13 +31,13 @@
 		<div>
 			<label for="vinculo">Vincula a tu asesor </label><br />
 			<div class="vincular">
-				<input type="text" id="vinculo" name="vinculo" placeholder="www.pasturapp.com/23asf3ef" />
+				<input type="text" id="vinculo" name="vinculo" value="23asf3ef" />
 				<button class="copiar" type="submit">Copiar</button>
 			</div>
 		</div>
 
 		<button class="sesion" id="sesion" type="submit"
-			><a href="/inicio-sesion">Cerrar Sesión</a></button
+			><a href="/inicio_sesion">Cerrar Sesión</a></button
 		>
 	</form>
 </div>

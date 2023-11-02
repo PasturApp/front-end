@@ -3,7 +3,7 @@
 	import Navbar from './components/navbar.svelte';
 	import Hamburger from './components/hamburger.svelte';
 
-	export let data; // <--
+	// export let data; // <--
 	let authenticated = true;
 </script>
 
@@ -36,7 +36,7 @@
 	}
 
 	.main {
-		@apply min-h-screen w-full p-4 grid place-items-center;
+		@apply min-h-screen w-full p-2 grid place-items-center;
 	}
 
 	:global(.navbar):hover .main {

@@ -1,4 +1,10 @@
 <script>
+	import Chart from 'chart.js/auto';
+	import Recommendations from '../components/recommendations.svelte';
+	export let data;
+	Chart.defaults.font.family = 'Montserrat';
+	Chart.defaults.font.weight = 'bold';
+
 	// import Swiper bundle with all modules installed
 	import Swiper from 'swiper/bundle';
 
@@ -13,6 +19,7 @@
 		swiper = new Swiper('.swiper', {
 			// Optional parameters
 			loop: true,
+			autoHeight: true,
 
 			// If we need pagination
 			pagination: {
@@ -23,12 +30,17 @@
 			navigation: {
 				nextEl: '.swiper-button-next',
 				prevEl: '.swiper-button-prev'
-			},
-
-			// And if we need scrollbar
-			scrollbar: {
-				el: '.swiper-scrollbar'
 			}
+		});
+
+		data.charts.forEach(({ canvaId, type, data, options }) => {
+			const canva = document.getElementById(canvaId);
+
+			new Chart(canva, {
+				type: type,
+				data: data,
+				options: options
+			});
 		});
 	});
 </script>
@@ -38,31 +50,36 @@
 	<!-- Additional required wrapper -->
 	<div class="swiper-wrapper">
 		<!-- Slides -->
-		{#each ['Pastoreo', 'Stock', 'Tasa de Crecimento', 'Uso del suelo'] as grafica}
+		{#each data.charts as grafica}
 			<div class="swiper-slide">
 				<div class="titulo">
-					<h1>{grafica}</h1>
+					<h1>{grafica.title}</h1>
 				</div>
 				<div class="wrapper">
-					<div class="recomendaciones">
-						<h2>Recomendaciones:</h2>
+					<div class="grafica">
+						<canvas id={grafica.canvaId} />
 					</div>
-					<div class="grafica">grafica aqui</div>
+					{#if grafica.title === 'Stock' || grafica.title === 'Pastoreo'}
+						<div class="recomendaciones">
+							<h2>Recomendaciones:</h2>
+							<Recommendations {grafica} />
+						</div>
+					{/if}
 				</div>
 			</div>
 		{/each}
 	</div>
 	<!-- If we need pagination -->
 	<div class="swiper-pagination" />
-
+	
 	<!-- If we need navigation buttons -->
 	<div class="swiper-button-prev" />
 	<div class="swiper-button-next" />
 </div>
 
-<style lang="css">
+<style lang="postcss">
 	.swiper {
-		@apply max-w-5xl h-fit;
+		@apply md:max-w-2xl lg:max-w-5xl pb-7;
 	}
 
 	.titulo {
@@ -70,11 +87,11 @@
 	}
 
 	.wrapper {
-		@apply flex flex-row justify-center gap-5;
+		@apply flex flex-col justify-center items-center gap-2;
 	}
 
 	h1 {
-		@apply rounded-2xl px-20 py-2 text-center text-xl font-semibold;
+		@apply rounded-2xl w-1/3 py-2 text-center text-xl font-semibold;
 
 		background-color: var(--verde_secundario);
 		font-family: var(--letra_titulo);
@@ -82,12 +99,19 @@
 	}
 
 	.recomendaciones {
-		@apply mt-4 pt-4 pb-80 p-12 rounded-xl;
+		@apply mt-2 px-5 py-3 h-fit rounded-xl w-2/3 text-justify;
 		background-color: var(--verde_fondos);
+
+	}
+
+	h2 {
+		@apply inline text-base;
+		font-family: var(--letra_titulo);
+		color: var(--verde_secundario);
 	}
 
 	.grafica {
-		@apply mt-4 pt-4 pb-80 p-60 rounded-xl;
+		@apply mt-4 pt-4 h-96 w-2/3 p-5 rounded-xl;
 		background-color: var(--verde_fondos);
 	}
 

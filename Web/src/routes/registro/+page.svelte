@@ -44,7 +44,7 @@
 
 <footer class="wrapper">
 	<p>¿Ya tienes una cuenta?</p>
-	<a href="/inicio-sesion">Iniciar Sesión</a>
+	<a href="/inicio_sesion">Iniciar Sesión</a>
 </footer>
 
 <style>
@@ -61,7 +61,7 @@
 	}
 	button {
 		@apply rounded-2xl max-w-full h-6 text-center cursor-pointer mt-4;
-		
+
 		background-color: var(--verde_oscuro);
 		color: var(--cremita);
 	}
