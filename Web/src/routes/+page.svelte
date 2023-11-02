@@ -8,11 +8,10 @@
 	import { format } from 'date-fns';
 
 	export let data;
-	console.log(data);
 	const establecimiento = data.dashboard[0];
 	const plataforma = data.dashboard[1];
 	onMount(() => {
-		new Calendar({
+		const calendar = new Calendar({
 			theme: 'glass',
 			id: '#color-calendar',
 			eventsData: [
@@ -44,6 +43,37 @@
 			// 	console.log('clicked slected date', currentDate, filteredMonthEvents);
 			// }
 		});
+
+		const addEventForm = document.querySelector('.addEventForm');
+		const addEventButton = document.querySelector('.addEvent');
+
+		addEventButton.addEventListener('click', () => {
+			if (addEventForm.style.display === 'none') {
+				addEventForm.style.display = 'block';
+			} else {
+				addEventForm.style.display = 'none';
+			}
+		});
+
+		addEventForm.addEventListener('submit', (event) => {
+			event.preventDefault();
+			// Obtenga los valores de los campos del formulario
+			const title = event.target.elements.title.value;
+			const start = event.target.elements.start.value;
+			const end = event.target.elements.end.value;
+
+			// Agregue el evento al calendario
+			calendar.addEventsData([
+				{
+					title: title,
+					start: start,
+					end: end
+				}
+			]);
+
+			// Cierre el popup form
+			addEventForm.style.display = 'none';
+		});
 	});
 	let newItem = '';
 	let todoList = [];
@@ -64,8 +94,6 @@
 			];
 			newItem = '';
 		}
-
-		console.log(todoList);
 	}
 </script>
 
@@ -135,8 +163,14 @@
 		<div class="calendario" id="color-calendar" />
 		<div class="evento">
 			<div>
-				<h1 class="addEvent">Eventos</h1>
+				<h1 class="titulo">Eventos</h1>
 				<button class="addEvent">+</button>
+				<form class="addEventForm">
+					<input type="text" placeholder="Título del evento" />
+					<input type="datetime-local" placeholder="Fecha y hora de inicio" />
+					<input type="datetime-local" placeholder="Fecha y hora de finalización" />
+					<button type="submit" class="submit">Agregar evento</button>
+				</form>
 			</div>
 			<div class="fecha" />
 		</div>
@@ -302,10 +336,21 @@
 		text-decoration: line-through;
 	}
 
-	.addEvent {
+	.titulo {
 		@apply inline;
 	}
 	button.addEvent {
-		@apply float-right;
+		@apply float-right inline;
+	}
+
+	.addEventForm {
+		display: none;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background-color: white;
+		padding: 20px;
+		border: 1px solid black;
 	}
 </style>
