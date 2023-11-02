@@ -44,7 +44,13 @@
 		</div>
 		<div class="Disponibilidad">
 			<div>
-				<label for="disponibilidad">Disponibilidad (kg/ha)</label>
+				{#if data.metodoUtilizado === 'visual'}
+					<label for="disponibilidad">Disponibilidad (kg/ha)</label>
+				{:else if data.metodoUtilizado === 'plato'}
+					<label for="disponibilidad">Altura de RPM</label>
+				{:else if data.metodoUtilizado === 'regla'}
+					<label for="disponibilidad">Altura de regla (cm)</label>
+				{/if}
 				<input type="text" id="disponibiliad" name="disponibiliad" />
 			</div>
 		</div>
