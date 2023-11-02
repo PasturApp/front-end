@@ -5,6 +5,7 @@
 	import 'color-calendar/dist/css/theme-glass.css';
 	import { onMount } from 'svelte';
 	import Icons from './icons.svelte';
+	import { format } from 'date-fns';
 
 	export let data;
 	console.log(data);
@@ -14,23 +15,36 @@
 		new Calendar({
 			theme: 'glass',
 			id: '#color-calendar',
-			eventsData: myEvents,
+			eventsData: [
+				{
+					id: 1,
+					name: 'French class',
+					start: '2023-11-17T06:00:00',
+					end: '2023-11-17T20:30:00'
+				}
+			],
 			primaryColor: '#528A3F',
 			headerColor: '#F5FFFA',
 			headerBackgroundColor: '#3F6F37',
-			weekdaysColor: '#0C523B'
+			weekdaysColor: '#0C523B',
+			dateChanged: (currentDate, events) => {
+				const divElements = document.getElementsByClassName('fecha');
+				if (divElements.length > 0) {
+					const shortDate = format(currentDate, 'dd/MM/yyyy');
+					divElements[0].innerHTML = `<p>${shortDate}</p>`;
+					events.forEach((event) => {
+						const toDate = new Date(event.start);
+						const shortDate = format(toDate, 'dd/MM/yyyy');
+						divElements[0].innerHTML = `<p>${shortDate}</p>`;
+						divElements[0].innerHTML += `<p>${event.name}</p>`;
+					});
+				}
+			}
+			// selectedDateClicked: (currentDate, filteredMonthEvents) => {
+			// 	console.log('clicked slected date', currentDate, filteredMonthEvents);
+			// }
 		});
 	});
-	const myEvents = [
-		{
-			start: '2021-04-15T06:00:00',
-			end: '2021-04-15T20:30:00',
-			name: 'Event 1',
-			url: 'https://www.cssscript.com',
-			desc: 'Description 1'
-			// more key value pairs here
-		}
-	];
 	let newItem = '';
 	let todoList = [];
 
@@ -121,9 +135,10 @@
 		<div class="calendario" id="color-calendar" />
 		<div class="evento">
 			<div>
-				<h1>Próximo evento</h1>
+				<h1 class="addEvent">Eventos</h1>
+				<button class="addEvent">+</button>
 			</div>
-			<div class="fecha">Fecha 8/11/23 15 hs</div>
+			<div class="fecha" />
 		</div>
 	</div>
 </div>
@@ -285,5 +300,12 @@
 
 	.todo__checked--strike {
 		text-decoration: line-through;
+	}
+
+	.addEvent {
+		@apply inline;
+	}
+	button.addEvent {
+		@apply float-right;
 	}
 </style>
