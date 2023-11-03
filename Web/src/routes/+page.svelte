@@ -39,9 +39,6 @@
 					});
 				}
 			}
-			// selectedDateClicked: (currentDate, filteredMonthEvents) => {
-			// 	console.log('clicked slected date', currentDate, filteredMonthEvents);
-			// }
 		});
 
 		const addEventForm = document.querySelector('.addEventForm');
@@ -162,14 +159,23 @@
 	<div class="derecha">
 		<div class="calendario" id="color-calendar" />
 		<div class="evento">
+			<h1 class="titulo">Eventos</h1>
+			<button class="addEvent">+</button>
 			<div>
-				<h1 class="titulo">Eventos</h1>
-				<button class="addEvent">+</button>
 				<form class="addEventForm">
-					<input type="text" placeholder="Título del evento" />
-					<input type="datetime-local" placeholder="Fecha y hora de inicio" />
-					<input type="datetime-local" placeholder="Fecha y hora de finalización" />
-					<button type="submit" class="submit">Agregar evento</button>
+					<div>
+						<label for="titulo">Título del evento</label><br>
+						<input type="text" id="titulo" name="titulo" />
+					</div>
+					<div>
+						<label for="inicio">Inicio</label><br>
+						<input type="datetime-local" id="inicio" name="inicio"/>
+					</div>
+					<div>
+						<label for="fin">Finalización</label><br>
+						<input type="datetime-local" id="fin" name="fin" />
+					</div>
+					<button type="submit" class="submit">Agregar</button>
 				</form>
 			</div>
 			<div class="fecha" />
@@ -339,18 +345,40 @@
 	.titulo {
 		@apply inline;
 	}
-	button.addEvent {
+
+	.addEvent {
 		@apply float-right inline;
 	}
 
 	.addEventForm {
-		display: none;
-		position: absolute;
-		top: 50%;
-		left: 50%;
+		@apply hidden absolute top-1/2 left-1/2 w-3/5 p-5 rounded-xl border-solid shadow-xl border-4;
 		transform: translate(-50%, -50%);
-		background-color: white;
-		padding: 20px;
-		border: 1px solid black;
+		background-color: var(--verde_secundario);
+		border-color: #376130;
 	}
+	.addEventForm div {
+		@apply inline-block mx-2
+	}
+
+	label {
+		color: var(--blanco_fondo)
+	}
+	
+	input {
+		@apply rounded-lg pl-2;
+		background-color: var(--verde_fondos);
+		color: var(--verde_primario);
+	}
+
+	.submit {
+		@apply rounded-xl p-1 px-2;
+		background-color: var(--verde_oscuro);
+		font-family: var(--letra_titulo);
+		color: var(--blanco_fondo);
+	}
+
+	.submit:hover {
+		background-color: #0a4330;
+	}
+
 </style>
