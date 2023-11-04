@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 
 	function typewriting() {
+		/* eslint-disable */
 		const typed = new Typed('#words', {
 			strings: [
 				'sustentable',
@@ -19,6 +20,7 @@
 			startDelay: 1000,
 			backDelay: 1500
 		});
+		/* eslint-enable */
 	}
 
 	onMount(() => {

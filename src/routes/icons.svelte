@@ -17,6 +17,7 @@
 	];
 	let displayIcon = icons.find((e) => e.name === name);
 
+	/* eslint-disable */
 	function removeFromList(index) {
 		todoList.splice(index, 1);
 		todoList = todoList;

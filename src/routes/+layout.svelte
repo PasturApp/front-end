@@ -1,4 +1,5 @@
 <script>
+	import { page } from '$app/stores';
 	import './index.css';
 	import Navbar from './components/navbar.svelte';
 	import Hamburger from './components/hamburger.svelte';
@@ -6,6 +7,20 @@
 	// export let data; // <--
 	let authenticated = true;
 </script>
+
+{#if $page.url.pathname === '/landing'}
+	<slot />
+{:else}
+	<div class:user-in={authenticated}>
+		{#if authenticated}
+			<Navbar />
+			<Hamburger />
+		{/if}
+		<main class="main">
+			<slot />
+		</main>
+	</div>
+{/if}
 
 <svelte:head>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" />
@@ -19,16 +34,6 @@
 	<link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 </svelte:head>
-
-<div class:user-in={authenticated}>
-	{#if authenticated}
-		<Navbar />
-		<Hamburger />
-	{/if}
-	<main class="main">
-		<slot />
-	</main>
-</div>
 
 <style lang="css">
 	.user-in {

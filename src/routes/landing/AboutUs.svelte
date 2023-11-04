@@ -155,7 +155,7 @@
 				</p>
 				<span class="details">
 					<h4>PasturApp team</h4>
-					<p>Grupo disfuncional de Holbies</p>
+					<p>Lorem ipsum, dolor</p>
 				</span>
 			</div>
 			<img src="/team-photo.jpg" alt="team" />
@@ -257,24 +257,24 @@
 		@apply block text-7xl h-10 font-extrabold text-right pr-2;
 		content: close-quote;
 	}
-	
+
 	.personal-info {
 		@apply flex flex-col items-center md:grid md:justify-items-center md:grid-cols-2 lg:grid-cols-3 lg:gap-0 xl:grid-cols-3 2xl:grid-cols-5;
 	}
-	
+
 	.details {
 		@apply text-left italic;
 		color: var(--white-background);
 	}
-	
+
 	.details::before {
 		content: '—';
 	}
-	
+
 	.details h4 {
 		@apply text-xl font-bold;
 	}
-	
+
 	.details p {
 		@apply text-sm;
 	}
