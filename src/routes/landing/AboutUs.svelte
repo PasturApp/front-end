@@ -3,7 +3,7 @@
 
 	const dataCardsAboutUs = [
 		{
-			src: '/micaela-picco.jpg',
+			src: 'images/micaela-picco.jpg',
 			srcAlt: 'Micaela Picco',
 			name: 'Micaela Picco',
 			info: 'Pica lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ipsum sapiente aspernatur.',
@@ -29,7 +29,7 @@
 			]
 		},
 		{
-			src: '/sol-puente.jpg',
+			src: 'images/sol-puente.jpg',
 			srcAlt: 'Sol Puente',
 			name: 'Sol Puente',
 			info: 'Solchu lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ipsum sapiente aspernatur.',
@@ -55,7 +55,7 @@
 			]
 		},
 		{
-			src: '/luz-saavedra.jpg',
+			src: 'images/luz-saavedra.jpg',
 			srcAlt: 'Luz Saavedra',
 			name: 'Luz Saavedra',
 			info: 'Looz lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ipsum sapiente aspernatur.',
@@ -81,7 +81,7 @@
 			]
 		},
 		{
-			src: '/mateo-olivera.jpg',
+			src: 'images/mateo-olivera.jpg',
 			srcAlt: 'Mateo Olivera',
 			name: 'Mateo Olivera',
 			info: 'Mateo lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ipsum sapiente aspernatur.',
@@ -107,7 +107,7 @@
 			]
 		},
 		{
-			src: '/patricio-benglian.jpg',
+			src: 'images/patricio-benglian.jpg',
 			srcAlt: 'Patricio Benglian',
 			name: 'Patricio Benglian',
 			info: 'Patricio lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ipsum sapiente aspernatur.',
@@ -158,7 +158,7 @@
 					<p>Lorem ipsum, dolor</p>
 				</span>
 			</div>
-			<img src="/team-photo.jpg" alt="team" />
+			<img src="images/team-photo.jpg" alt="team" />
 		</div>
 		<!--Personal cards-->
 		<div class="personal-info">
@@ -184,7 +184,7 @@
 
 	#about-us {
 		@apply relative flex justify-center items-center pt-20 pb-14 px-20;
-		background: url('/gradient-background.png');
+		background: url('images/gradient-background.png');
 		background-size: cover;
 	}
 

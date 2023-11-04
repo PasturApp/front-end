@@ -4,12 +4,12 @@
 	const dataCards = [
 		{
 			title: 'Productor',
-			image: '/producer.png',
+			image: 'images/producer.png',
 			steps: ['Regístrese', 'Ingrese datos', 'Conéctese con su asesor', 'Supervise su sistema']
 		},
 		{
 			title: 'Asesor',
-			image: '/advisory.png',
+			image: 'images/advisory.png',
 			steps: ['Regístrese', 'Conéctese con su productor', 'Visualice datos']
 		}
 	];
@@ -31,7 +31,7 @@
 	#how-it-works {
 		@apply flex relative justify-center items-center py-20 px-20;
 		transform: skewY(-3deg);
-		background: url('/blurry-gradient-background.png') no-repeat;
+		background: url('images/blurry-gradient-background.png') no-repeat;
 		background-size: cover;
 	}
 

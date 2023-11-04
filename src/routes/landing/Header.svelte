@@ -92,7 +92,7 @@
 				rgba(29, 91, 17, 0.59) 66.15%,
 				rgba(22, 42, 19, 0.59) 89.32%
 			),
-			url('/background.png');
+			url('images/background.png');
 		background-size: cover;
 	}
 

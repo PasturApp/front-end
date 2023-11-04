@@ -10,7 +10,7 @@
 		<button class="go-to-app">Ir a la App</button>
 	</article>
 	<div class="product-overview">
-		<img src="/overview.png" alt="product overview" />
+		<img src="images/overview.png" alt="product overview" />
 	</div>
 </section>
 
@@ -56,6 +56,5 @@
 	}
 
 	@media only screen and (hover: none) {
-
 	}
 </style>
