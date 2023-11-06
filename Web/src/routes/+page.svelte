@@ -79,7 +79,7 @@
 		</article>
 	</section>
 
-	<section class="centro">hola</section>
+	<section class="centro"><img src="images/logoynombre.png" alt="" /></section>
 
 	<section class="derecha">
 		<header>
