@@ -5,7 +5,8 @@ export async function load() {
     vacas: 150,
     pv: 450,
     produccion: 25,
-    carga: 1.25
+    carga: 1.25,
+    productividad: 953
   },
   {
     fecha: "24/4/2023",

@@ -1,77 +1,11 @@
 <script>
 	import './index.css';
-	import Calendar from 'color-calendar';
-	import 'color-calendar/dist/css/theme-basic.css';
-	import 'color-calendar/dist/css/theme-glass.css';
-	import { onMount } from 'svelte';
 	import Icons from './icons.svelte';
-	import { format } from 'date-fns';
 
 	export let data;
 	const establecimiento = data.dashboard[0];
 	const plataforma = data.dashboard[1];
-	onMount(() => {
-		const calendar = new Calendar({
-			theme: 'glass',
-			id: '#color-calendar',
-			eventsData: [
-				{
-					id: 1,
-					name: 'French class',
-					start: '2023-11-17T06:00:00',
-					end: '2023-11-17T20:30:00'
-				}
-			],
-			primaryColor: '#528A3F',
-			headerColor: '#F5FFFA',
-			headerBackgroundColor: '#3F6F37',
-			weekdaysColor: '#0C523B',
-			dateChanged: (currentDate, events) => {
-				const divElements = document.getElementsByClassName('fecha');
-				if (divElements.length > 0) {
-					const shortDate = format(currentDate, 'dd/MM/yyyy');
-					divElements[0].innerHTML = `<p>${shortDate}</p>`;
-					events.forEach((event) => {
-						const toDate = new Date(event.start);
-						const shortDate = format(toDate, 'dd/MM/yyyy');
-						divElements[0].innerHTML = `<p>${shortDate}</p>`;
-						divElements[0].innerHTML += `<p>${event.name}</p>`;
-					});
-				}
-			}
-		});
 
-		const addEventForm = document.querySelector('.addEventForm');
-		const addEventButton = document.querySelector('.addEvent');
-
-		addEventButton.addEventListener('click', () => {
-			if (addEventForm.style.display === 'none') {
-				addEventForm.style.display = 'block';
-			} else {
-				addEventForm.style.display = 'none';
-			}
-		});
-
-		addEventForm.addEventListener('submit', (event) => {
-			event.preventDefault();
-			// Obtenga los valores de los campos del formulario
-			const title = event.target.elements.title.value;
-			const start = event.target.elements.start.value;
-			const end = event.target.elements.end.value;
-
-			// Agregue el evento al calendario
-			calendar.addEventsData([
-				{
-					title: title,
-					start: start,
-					end: end
-				}
-			]);
-
-			// Cierre el popup form
-			addEventForm.style.display = 'none';
-		});
-	});
 	let newItem = '';
 	let todoList = [];
 
@@ -95,39 +29,64 @@
 </script>
 
 <div class="wrapper">
-	<div class="izquierda">
-		<div class="datos">
-			<div class="establecimiento">
-				<div>
-					<h1>Datos del establecimiento</h1>
+	<section class="izquierda">
+		<article class="establecimiento">
+			<header>
+				<h2>Datos del establecimiento</h2>
+			</header>
+			<div class="datos-resumen">
+				<div class="recuadro">
+					<h3>Fecha:</h3>
+					{establecimiento.mes}
 				</div>
-				<div class="datos-lista">
-					<ul>
-						<li>Última actualización: {establecimiento.mes}</li>
-						<li>N° de vacas: {establecimiento.vacas}</li>
-						<li>PV: {establecimiento.pv} kg/VO</li>
-						<li>Producción individual: {establecimiento.produccion} lt/VO</li>
-						<li>Carga: {establecimiento.carga} VO/haSEP</li>
-					</ul>
-				</div>
-			</div>
-			<div class="plataforma">
-				<div>
-					<h1>Plataforma de pastoreo</h1>
-				</div>
-				<div class="datos-lista">
-					<ul>
-						<li>Fecha: {plataforma.fecha}</li>
-						<li>TC: {plataforma.tc} kgMS/ha</li>
-						<li>Demanda: {plataforma.demanda} kgMS/ha</li>
-						<li>Stock: {plataforma.stock} kgMS/ha</li>
-					</ul>
+				<div class="recuadro">
+					<h3>Carga:</h3>
+					<p>
+						{establecimiento.carga} VO/haSEP
+					</p>
 				</div>
 			</div>
-		</div>
+		</article>
+		<article class="produccion">
+			<header>
+				<h2>Datos de produccion</h2>
+			</header>
+			<div class="datos-resumen">
+				<div class="recuadro">
+					<h3>Producción individual:</h3>
+					<p>{establecimiento.produccion} lt/VO</p>
+				</div>
+				<div class="recuadro">
+					<h3>Productividad:</h3>
+					<p>{establecimiento.productividad} lt/ha/mes</p>
+				</div>
+			</div>
+		</article>
+		<article class="plataforma">
+			<div>
+				<h2>Plataforma de pastoreo</h2>
+			</div>
+			<div class="datos-resumen">
+				<div class="recuadro">
+					<h3>Oferta:</h3>
+					<p>{plataforma.tc} kgMS/ha/d</p>
+				</div>
+				<div class="recuadro">
+					<h3>Demanda</h3>
+					<p>{plataforma.demanda} kgMS/ha/d</p>
+				</div>
+			</div>
+		</article>
+	</section>
+
+	<section class="centro">hola</section>
+
+	<section class="derecha">
+		<header>
+			<h1>Lista de tareas</h1>
+		</header>
 		<div class="container">
 			<div>
-				<h1>Lista de tareas</h1>
 				<form on:submit|preventDefault={addTodo}>
 					<input
 						bind:value={newItem}
@@ -155,107 +114,60 @@
 				{/each}
 			</div>
 		</div>
-	</div>
-	<div class="derecha">
-		<div class="calendario" id="color-calendar" />
-		<div class="evento">
-			<h1 class="titulo">Eventos</h1>
-			<button class="addEvent">+</button>
-			<div>
-				<form class="addEventForm">
-					<div>
-						<label for="titulo">Título del evento</label><br>
-						<input type="text" id="titulo" name="titulo" />
-					</div>
-					<div>
-						<label for="inicio">Inicio</label><br>
-						<input type="datetime-local" id="inicio" name="inicio"/>
-					</div>
-					<div>
-						<label for="fin">Finalización</label><br>
-						<input type="datetime-local" id="fin" name="fin" />
-					</div>
-					<button type="submit" class="submit">Agregar</button>
-				</form>
-			</div>
-			<div class="fecha" />
-		</div>
-	</div>
+	</section>
 </div>
 
 <style lang="postcss">
 	.wrapper {
 		@apply mt-14 w-full md:mt-0 md:w-3/4 lg:w-full lg:grid lg:gap-3;
-		grid-template-columns: 2fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr;
 	}
 
 	.izquierda {
-		@apply lg:grid lg:gap-1;
+		@apply lg:grid lg:gap-1 lg:col-start-1 lg:col-end-2;
 	}
 
-	.datos {
-		@apply w-full lg:grid lg:gap-3 lg:row-start-1 lg:row-end-2;
+	.centro {
+		@apply lg:col-start-2 lg:col-end-3;
 	}
 
-	.establecimiento {
-		@apply lg:col-start-1 lg:col-end-2;
+	.derecha {
+		@apply lg:grid gap-1 lg:col-start-3 lg:col-end-4;
 	}
-
 	h1 {
+		@apply text-4xl text-center;
+		font-family: var(--letra_titulo);
+		color: var(--verde_oscuro);
+	}
+
+	h2 {
 		@apply ml-2;
 		font-family: var(--letra_titulo);
 		color: var(--verde_oscuro);
 	}
 
-	.datos-lista {
-		@apply pl-8 rounded-xl;
-		background-color: var(--verde_secundario);
+	h3 {
+		@apply ml-2 text-xs;
+		font-family: var(--letra_titulo);
+		color: var(--verde_fondos);
 	}
 
 	.container div {
 		@apply p-4 lg:row-start-2 lg:row-end-3;
 	}
 
-	.datos-lista {
-		@apply h-36;
-		line-height: 150px;
-	}
-
-	ul {
-		@apply list-disc inline-block align-middle leading-normal;
-	}
-
-	li {
-		font-family: var(--letra_titulo);
-		color: var(--blanco_fondo);
-	}
-
-	.plataforma {
-		@apply lg:col-start-2 lg:col-end-3;
-	}
-
-	.derecha {
-		@apply lg:grid gap-3;
-	}
-
-	.calendario {
-		@apply hidden;
-		@apply lg:block lg:row-start-1 lg:row-end-2;
-	}
-
-	.evento {
-		@apply w-full xl:w-96 lg:row-start-2 lg:row-end-3;
-	}
-
-	.fecha {
-		@apply p-6 pl-8 rounded-xl text-2xl;
+	.datos-resumen {
+		@apply flex flex-row text-xl items-center justify-around text-center rounded-xl p-6;
 		background-color: var(--verde_secundario);
+		color: var(--verde_fondos);
 		font-family: var(--letra_titulo);
-		color: var(--blanco_fondo);
 	}
-	.container h1 {
-		@apply text-4xl;
-		color: var(--verde_oscuro);
+
+	.recuadro {
+		@apply p-4;
+		border-radius: 60px;
+		background: linear-gradient(145deg, #356c36, #3f8040);
+		box-shadow: 8px 8px 30px #377038, -8px -8px 39px #3f8040;
 	}
 
 	.container {
@@ -298,8 +210,9 @@
 	.container::-webkit-scrollbar-corner {
 		background: transparent;
 	}
+
 	.todos__input {
-		@apply w-2/3;
+		@apply w-3/4;
 		background-color: inherit;
 		border: none;
 		box-shadow: none;
@@ -357,13 +270,13 @@
 		border-color: #376130;
 	}
 	.addEventForm div {
-		@apply inline-block mx-2
+		@apply inline-block mx-2;
 	}
 
 	label {
-		color: var(--blanco_fondo)
+		color: var(--blanco_fondo);
 	}
-	
+
 	input {
 		@apply rounded-lg pl-2;
 		background-color: var(--verde_fondos);
@@ -371,7 +284,7 @@
 	}
 
 	.submit {
-		@apply rounded-xl p-1 px-2;
+		@apply rounded-xl ml-7 p-1 px-2;
 		background-color: var(--verde_oscuro);
 		font-family: var(--letra_titulo);
 		color: var(--blanco_fondo);
@@ -380,5 +293,4 @@
 	.submit:hover {
 		background-color: #0a4330;
 	}
-
 </style>
