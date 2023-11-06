@@ -10,7 +10,7 @@
 	console.log(data);
 	const establecimiento = data.dashboardEstable;
 	const plataforma = data.dashboardPlat;
-	// Estable dashboard date modi
+	// Estable dashboard date modi.
 	const estable_fechaCompleta = establecimiento[0];
 	const estable_fechaObj = new Date(estable_fechaCompleta);
 	const estable_mes = estable_fechaObj.getMonth();
