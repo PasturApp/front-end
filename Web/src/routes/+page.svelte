@@ -132,10 +132,10 @@
 	}
 
 	.derecha {
-		@apply lg:grid gap-1 lg:col-start-3 lg:col-end-4;
+		@apply lg:col-start-3 lg:col-end-4;
 	}
 	h1 {
-		@apply text-4xl text-center;
+		@apply text-4xl;
 		font-family: var(--letra_titulo);
 		color: var(--verde_oscuro);
 	}
@@ -150,10 +150,6 @@
 		@apply ml-2 text-xs;
 		font-family: var(--letra_titulo);
 		color: var(--verde_fondos);
-	}
-
-	.container div {
-		@apply p-4 lg:row-start-2 lg:row-end-3;
 	}
 
 	.datos-resumen {
@@ -221,6 +217,7 @@
 		border-bottom: 1px solid var(--verde_oscuro);
 		margin-top: 15px;
 		outline: none;
+		color: var(--verde_oscuro);
 	}
 	.todos__button {
 		background-color: inherit;
@@ -230,9 +227,7 @@
 		cursor: pointer;
 	}
 	.todo {
-		@apply flex p-4 h-12 rounded-2xl w-10 text-lg font-extrabold;
-
-		box-shadow: 0 0 15px rgb(12 82 59 / 20%);
+		@apply flex p-4 h-12 rounded-2xl w-10 text-lg font-extrabold shadow-md;
 		background-color: hsla(0, 0%, 100%, 0.2);
 		color: var(--verde_oscuro);
 		-webkit-backdrop-filter: blur(25px);
@@ -253,44 +248,5 @@
 
 	.todo__checked--strike {
 		text-decoration: line-through;
-	}
-
-	.titulo {
-		@apply inline;
-	}
-
-	.addEvent {
-		@apply float-right inline;
-	}
-
-	.addEventForm {
-		@apply hidden absolute top-1/2 left-1/2 w-3/5 p-5 rounded-xl border-solid shadow-xl border-4;
-		transform: translate(-50%, -50%);
-		background-color: var(--verde_secundario);
-		border-color: #376130;
-	}
-	.addEventForm div {
-		@apply inline-block mx-2;
-	}
-
-	label {
-		color: var(--blanco_fondo);
-	}
-
-	input {
-		@apply rounded-lg pl-2;
-		background-color: var(--verde_fondos);
-		color: var(--verde_primario);
-	}
-
-	.submit {
-		@apply rounded-xl ml-7 p-1 px-2;
-		background-color: var(--verde_oscuro);
-		font-family: var(--letra_titulo);
-		color: var(--blanco_fondo);
-	}
-
-	.submit:hover {
-		background-color: #0a4330;
 	}
 </style>
