@@ -187,7 +187,7 @@
 
   #about-us {
     @apply relative flex justify-center items-center pt-20 pb-14 px-20;
-    background: url('gradient-background.png');
+    background: url('/gradient-background.png');
     background-size: cover;
   }
 

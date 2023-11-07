@@ -8,7 +8,7 @@
   let authenticated = true;
 </script>
 
-{#if $page.url.pathname === '/landing'}
+{#if ['/landing', '/registro', '/rol'].includes($page.url.pathname)}
   <slot />
 {:else}
   <div class:user-in={authenticated}>
