@@ -1,31 +1,50 @@
 <script>
 	import './index.css';
-	import Icons from './icons.svelte';
+	import Chart from 'chart.js/auto';
+	import { onMount } from 'svelte';
+	import Recommendations from './components/recommendations.svelte';
+	Chart.defaults.font.family = 'Montserrat';
+	Chart.defaults.font.weight = 'bold';
+
+	// import Swiper bundle with all modules installed
+	import Swiper from 'swiper/bundle';
+
+	// import styles bundle
+	import 'swiper/css/bundle';
+
+	let swiper; // Define a variable to hold the Swiper instance
 
 	export let data;
 	const establecimiento = data.dashboard[0];
 	const plataforma = data.dashboard[1];
 
-	let newItem = '';
-	let todoList = [];
+	onMount(() => {
+		swiper = new Swiper('.swiper', {
+			// Optional parameters
+			loop: true,
+			autoHeight: true,
 
-	function removeFromList(index) {
-		todoList.splice(index, 1);
-		todoList = todoList;
-	}
+			// If we need pagination
+			pagination: {
+				el: '.swiper-pagination'
+			},
 
-	function addTodo() {
-		if (newItem !== '') {
-			todoList = [
-				...todoList,
-				{
-					task: newItem,
-					completed: false
-				}
-			];
-			newItem = '';
-		}
-	}
+			// Navigation arrows
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev'
+			}
+		});
+		data.charts.forEach(({ canvaId, type, data, options }) => {
+			const canva = document.getElementById(canvaId);
+
+			new Chart(canva, {
+				type: type,
+				data: data,
+				options: options
+			});
+		});
+	});
 </script>
 
 <div class="wrapper">
@@ -37,7 +56,7 @@
 			<div class="datos-resumen">
 				<div class="recuadro">
 					<h3>Fecha:</h3>
-					{establecimiento.mes}
+					<p>{establecimiento.mes}</p>
 				</div>
 				<div class="recuadro">
 					<h3>Carga:</h3>
@@ -49,7 +68,7 @@
 		</article>
 		<article class="produccion">
 			<header>
-				<h2>Datos de produccion</h2>
+				<h2>Datos de producción</h2>
 			</header>
 			<div class="datos-resumen">
 				<div class="recuadro">
@@ -72,70 +91,82 @@
 					<p>{plataforma.tc} kgMS/ha/d</p>
 				</div>
 				<div class="recuadro">
-					<h3>Demanda</h3>
+					<h3>Demanda:</h3>
 					<p>{plataforma.demanda} kgMS/ha/d</p>
 				</div>
 			</div>
 		</article>
 	</section>
 
-	<section class="centro"><img src="images/logoynombre.png" alt="" /></section>
-
 	<section class="derecha">
-		<header>
-			<h1>Lista de tareas</h1>
-		</header>
-		<div class="container">
-			<div>
-				<form on:submit|preventDefault={addTodo}>
-					<input
-						bind:value={newItem}
-						type="task"
-						class="todos__input"
-						placeholder="Agregar tarea"
-					/>
-					<button class="todos__button">+</button>
-				</form>
-				{#each todoList as item, index}
-					<div class="todo">
-						<span class={`todo__text ${item.completed ? 'todo__checked--strike' : ''}`}
-							>{item.task}</span
-						>
-						<div class="icons">
-							<button class="icon__button" on:click={() => (item.completed = !item.completed)}>
-								<Icons name="check-mark" class="icon" />
-							</button>
-
-							<button class="icon__button" on:click={() => removeFromList(index)}>
-								<Icons name="delete" class="icon" />
-							</button>
+		<div class="swiper">
+			<!-- Additional required wrapper -->
+			<div class="swiper-wrapper">
+				<!-- Slides -->
+				{#each data.charts as grafica}
+					<div class="swiper-slide">
+						<div class="wrap">
+							<div class="grafica">
+								<canvas id={grafica.canvaId} />
+							</div>
+							{#if grafica.title === 'Stock' || grafica.title === 'Pastoreo'}
+								<div class="recomendaciones">
+									<h2>Recomendaciones:</h2>
+									<Recommendations {grafica} />
+								</div>
+							{/if}
 						</div>
 					</div>
 				{/each}
 			</div>
+			<!-- If we need pagination -->
+			<div class="swiper-pagination" />
+
+			<!-- If we need navigation buttons -->
+			<div class="swiper-button-prev" />
+			<div class="swiper-button-next" />
 		</div>
 	</section>
 </div>
 
 <style lang="postcss">
 	.wrapper {
-		@apply mt-14 w-full md:mt-0 md:w-3/4 lg:w-full lg:grid lg:gap-3;
-		grid-template-columns: 1fr 1fr 1fr;
+		@apply mt-14 w-full md:mt-0 md:w-3/4 lg:w-full lg:grid lg:gap-14 px-3;
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.wrap {
+		@apply flex flex-col justify-center items-center gap-2;
+	}
+
+	.swiper {
+		@apply md:max-w-2xl lg:max-w-5xl pb-7;
+	}
+
+	.establecimiento {
+		@apply mt-2;
+	}
+
+	.grafica {
+		@apply mt-4 pt-4 h-96 p-5 w-3/4 rounded-xl;
+		background-color: var(--verde_fondos);
+	}
+
+	p {
+		@apply text-2xl;
+		font-family: var(--letra_titulo);
 	}
 
 	.izquierda {
-		@apply lg:grid lg:gap-1 lg:col-start-1 lg:col-end-2;
-	}
-
-	.centro {
-		@apply lg:col-start-2 lg:col-end-3;
+		@apply lg:col-start-1 lg:col-end-2 flex flex-col justify-center;
 	}
 
 	.derecha {
-		@apply lg:col-start-3 lg:col-end-4;
+		@apply lg:col-start-2 lg:col-end-4 flex justify-center items-center;
 	}
+
 	h1 {
-		@apply text-4xl;
+		@apply text-4xl text-center p-4;
 		font-family: var(--letra_titulo);
 		color: var(--verde_oscuro);
 	}
@@ -148,22 +179,39 @@
 
 	h3 {
 		@apply ml-2 text-xs;
+		color: var(--verde_primario);
+	}
+
+	.swiper-button-prev,
+	.swiper-button-next {
+		color: var(--verde_secundario);
+	}
+
+	.titulo {
+		@apply flex justify-center;
+	}
+
+	.titulo h1 {
+		@apply rounded-2xl w-1/3 py-2 text-center text-xl font-semibold;
+
+		background-color: var(--verde_secundario);
 		font-family: var(--letra_titulo);
 		color: var(--verde_fondos);
+	}
+
+	.recomendaciones {
+		@apply mt-2 px-5 py-3 h-fit rounded-xl w-3/4 text-justify;
+		background-color: var(--verde_fondos);
 	}
 
 	.datos-resumen {
-		@apply flex flex-row text-xl items-center justify-around text-center rounded-xl p-6;
-		background-color: var(--verde_secundario);
-		color: var(--verde_fondos);
-		font-family: var(--letra_titulo);
+		@apply flex flex-row text-xl justify-around text-center rounded-xl p-4 mb-4;
+		color: var(--verde_primario);
+		background-color: #cfe9d4;
 	}
 
 	.recuadro {
-		@apply p-4;
-		border-radius: 60px;
-		background: linear-gradient(145deg, #356c36, #3f8040);
-		box-shadow: 8px 8px 30px #377038, -8px -8px 39px #3f8040;
+		@apply p-4 rounded-xl;
 	}
 
 	.container {
