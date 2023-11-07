@@ -47,6 +47,9 @@
 	});
 </script>
 
+<div class="header">
+	<h1>Indicadores clave de rendimiento</h1>
+</div>
 <div class="wrapper">
 	<section class="izquierda">
 		<article class="establecimiento">
@@ -131,7 +134,7 @@
 
 <style lang="postcss">
 	.wrapper {
-		@apply mt-14 w-full md:mt-0 md:w-3/4 lg:w-full lg:grid lg:gap-14 px-3;
+		@apply w-96 md:mt-0 md:w-3/4 lg:w-full lg:grid lg:gap-14 px-3;
 		grid-template-columns: 1fr 1fr;
 	}
 
@@ -140,7 +143,7 @@
 	}
 
 	.swiper {
-		@apply md:max-w-2xl lg:max-w-5xl pb-7;
+		@apply hidden md:block md:max-w-2xl lg:max-w-5xl pb-7;
 	}
 
 	.establecimiento {
@@ -165,10 +168,15 @@
 		@apply lg:col-start-2 lg:col-end-4 flex justify-center items-center;
 	}
 
+	.header {
+		@apply w-56 md:w-fit flex flex-col justify-center p-3 rounded-xl shadow-md;
+		background-color: var(--verde_primario)
+	}
+
 	h1 {
-		@apply text-4xl text-center p-4;
+		@apply md:text-3xl text-center ;
 		font-family: var(--letra_titulo);
-		color: var(--verde_oscuro);
+		color: var(--verde_fondos);
 	}
 
 	h2 {
@@ -214,10 +222,6 @@
 		@apply p-4 rounded-xl;
 	}
 
-	.container {
-		@apply h-60 md:h-96 overflow-y-scroll;
-	}
-
 	.container::-webkit-scrollbar {
 		width: 12px;
 		height: 115px;
@@ -255,46 +259,5 @@
 		background: transparent;
 	}
 
-	.todos__input {
-		@apply w-3/4;
-		background-color: inherit;
-		border: none;
-		box-shadow: none;
-		text-decoration: none;
-		font-size: 1.2rem;
-		border-bottom: 1px solid var(--verde_oscuro);
-		margin-top: 15px;
-		outline: none;
-		color: var(--verde_oscuro);
-	}
-	.todos__button {
-		background-color: inherit;
-		border: none;
-		box-shadow: none;
-		font-size: 1.2rem;
-		cursor: pointer;
-	}
-	.todo {
-		@apply flex p-4 h-12 rounded-2xl w-10 text-lg font-extrabold shadow-md;
-		background-color: hsla(0, 0%, 100%, 0.2);
-		color: var(--verde_oscuro);
-		-webkit-backdrop-filter: blur(25px);
-		backdrop-filter: blur(25px);
-		width: inherit;
-		margin-top: 15px;
-		justify-content: space-between;
-		align-items: center;
-	}
-	.icon__button {
-		background-color: transparent;
-		border: none;
-		box-shadow: none;
-		font-size: 1.2rem;
-		cursor: pointer;
-		color: rgba(0, 0, 0, 0.54);
-	}
-
-	.todo__checked--strike {
-		text-decoration: line-through;
-	}
+	
 </style>
