@@ -215,7 +215,7 @@
 <style lang="css">
 	.navbar {
 		@apply w-20 fixed hidden min-h-screen;
-		@apply md:block md:sticky;
+		@apply md:block;
 		background-color: var(--verde_primario);
 		transition: width 200ms ease;
 	}
