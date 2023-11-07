@@ -2,22 +2,18 @@
 export async function load() {
   const dashboard = [{
     mes: 'Septiembre',
-    vacas: 150,
-    pv: 450,
     produccion: 25,
     carga: 1.25,
     productividad: 953
   },
   {
-    fecha: "24/4/2023",
     tc: 40,
     demanda: 35,
-    stock: 2600
   }]
 
   const data = [
     {
-      labels: ['Agosto', 'Setiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+      labels: ['3/8/23', '18/8/23', '2/9/23', '17/9/23', '1/10/23'],
       datasets: [
         {
           label: 'Stock',
@@ -37,7 +33,7 @@ export async function load() {
       ]
     },
     {
-      labels: ['Agosto', 'Setiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+      labels: ['3/8/23', '18/8/23', '2/9/23', '17/9/23', '1/10/23'],
       datasets: [
         {
           label: 'Tasa de crecimiento',
@@ -176,7 +172,7 @@ export async function load() {
           title: {
             display: true,
             position: 'top',
-            text: 'Pastoreo',
+            text: 'Disponibilidad por potrero',
             align: 'center',
             font: {
               size: 20,
