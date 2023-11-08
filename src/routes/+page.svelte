@@ -48,7 +48,7 @@
 </script>
 
 <div class="header">
-	<h1>¡Bienvenido!</h1>
+	<h1>¡Bienvenido a PasturApp!</h1>
 </div>
 <div class="wrapper">
 	<section class="izquierda">
@@ -174,7 +174,7 @@
 
 	h1 {
 		@apply md:text-5xl text-center;
-		font-family: var(--letra_titulo);
+		font-family: 'comfortaa';
 		color: var(--verde_oscuro);
 	}
 
