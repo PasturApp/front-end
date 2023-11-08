@@ -48,7 +48,7 @@
 </script>
 
 <div class="header">
-	<h1>Indicadores clave de rendimiento</h1>
+	<h1>¡Bienvenido!</h1>
 </div>
 <div class="wrapper">
 	<section class="izquierda">
@@ -169,14 +169,13 @@
 	}
 
 	.header {
-		@apply w-56 md:w-fit flex flex-col justify-center p-3 rounded-xl shadow-md;
-		background-color: var(--verde_primario)
+		@apply w-56 md:w-fit flex flex-col justify-center p-3 rounded-xl;
 	}
 
 	h1 {
-		@apply md:text-3xl text-center ;
+		@apply md:text-5xl text-center;
 		font-family: var(--letra_titulo);
-		color: var(--verde_fondos);
+		color: var(--verde_oscuro);
 	}
 
 	h2 {
@@ -258,6 +257,4 @@
 	.container::-webkit-scrollbar-corner {
 		background: transparent;
 	}
-
-	
 </style>
