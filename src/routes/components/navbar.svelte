@@ -242,7 +242,7 @@
 
 <style lang="css">
 	.nav_bar {
-		@apply w-20 fixed hidden min-h-screen;
+		@apply w-20 fixed hidden min-h-screen z-10;
 		@apply md:block md:fixed;
 		background-color: var(--verde_primario);
 		transition: width 200ms ease;

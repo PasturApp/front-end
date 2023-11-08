@@ -29,10 +29,10 @@
 
 <style lang="css">
 	.wrapper {
-		@apply flex flex-col items-center gap-10;
+		@apply flex flex-col items-center justify-center;
 	}
 	.table {
-		@apply flex flex-col overflow-y-scroll h-96;
+		@apply flex items-center justify-center overflow-y-scroll h-60;
 	}
 	.table::-webkit-scrollbar {
 		width: 12px;
