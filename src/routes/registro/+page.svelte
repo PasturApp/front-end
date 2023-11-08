@@ -1,53 +1,59 @@
 <script>
 </script>
 
-<div class="wrapper">
-	<div>
-		<img
-			type="image/png"
-			alt="pasturapp logo"
-			width="150"
-			height="170"
-			src="images/logoynombre.png"
-		/>
+<div class="main">
+	<div class="wrapper">
+		<div>
+			<img
+				type="image/png"
+				alt="pasturapp logo"
+				width="150"
+				height="170"
+				src="images/logoynombre.png"
+			/>
+		</div>
+		<form>
+			<div class="nombreApellido">
+				<div>
+					<label for="nombre">Nombre</label><br />
+					<input type="text" id="nombre" name="nombre" placeholder="Betty" />
+				</div>
+				<div>
+					<label for="email">Apellido</label><br />
+					<input type="text" id="apellido" name="apellido" placeholder="Doomberton" />
+				</div>
+			</div>
+			<div>
+				<label for="email">Email</label><br />
+				<input type="text" id="email" name="email" placeholder="email@ejemplo.com" />
+			</div>
+			<div>
+				<label for="constraseña">Contraseña</label><br />
+				<input type="password" id="constraseña" name="constraseña" placeholder="••••••••••" />
+			</div>
+			<div>
+				<label for="confirmar">Confirmar Contraseña</label><br />
+				<input type="password" id="confirmar" name="confirmar" placeholder="••••••••••" />
+			</div>
+			<div>
+				<label for="celular">Celular</label><br />
+				<input type="int" id="celular" name="celular" value="+598" />
+			</div>
+			<button type="submit">Registrarse</button>
+		</form>
 	</div>
-	<form>
-		<div class="nombreApellido">
-			<div>
-				<label for="nombre">Nombre</label><br />
-				<input type="text" id="nombre" name="nombre" placeholder="Betty" />
-			</div>
-			<div>
-				<label for="email">Apellido</label><br />
-				<input type="text" id="apellido" name="apellido" placeholder="Doomberton" />
-			</div>
-		</div>
-		<div>
-			<label for="email">Email</label><br />
-			<input type="text" id="email" name="email" placeholder="email@ejemplo.com" />
-		</div>
-		<div>
-			<label for="constraseña">Contraseña</label><br />
-			<input type="password" id="constraseña" name="constraseña" placeholder="••••••••••" />
-		</div>
-		<div>
-			<label for="confirmar">Confirmar Contraseña</label><br />
-			<input type="password" id="confirmar" name="confirmar" placeholder="••••••••••" />
-		</div>
-		<div>
-			<label for="celular">Celular</label><br />
-			<input type="int" id="celular" name="celular" value="+598" />
-		</div>
-		<button type="submit">Registrarse</button>
-	</form>
+
+	<footer class="wrapper">
+		<p>¿Ya tienes una cuenta?</p>
+		<a href="/inicio_sesion">Iniciar Sesión</a>
+	</footer>
 </div>
 
-<footer class="wrapper">
-	<p>¿Ya tienes una cuenta?</p>
-	<a href="/inicio_sesion">Iniciar Sesión</a>
-</footer>
-
 <style>
+	.main {
+		@apply min-h-screen w-full ml-20 p-2 grid place-items-center;
+	}
+
 	.wrapper {
 		@apply flex justify-center items-center flex-col;
 	}

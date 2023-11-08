@@ -1,35 +1,41 @@
 <script>
 </script>
 
-<div class="wrapper">
-	<div>
-		<img
-			type="image/png"
-			alt="pasturapp logo"
-			width="150"
-			height="170"
-			src="images/logoynombre.png"
-		/>
+<div class="main">
+	<div class="wrapper">
+		<div>
+			<img
+				type="image/png"
+				alt="pasturapp logo"
+				width="150"
+				height="170"
+				src="images/logoynombre.png"
+			/>
+		</div>
+		<form>
+			<div>
+				<label for="email">Email</label><br />
+				<input type="text" id="email" name="email" placeholder="email@ejemplo.com" />
+			</div>
+			<div>
+				<label for="contraseña">Contraseña</label><br />
+				<input type="password" id="contraseña" name="constraseña" placeholder="••••••••••" />
+			</div>
+			<button type="submit">Iniciar Sesión</button>
+		</form>
 	</div>
-	<form>
-		<div>
-			<label for="email">Email</label><br />
-			<input type="text" id="email" name="email" placeholder="email@ejemplo.com" />
-		</div>
-		<div>
-			<label for="contraseña">Contraseña</label><br />
-			<input type="password" id="contraseña" name="constraseña" placeholder="••••••••••" />
-		</div>
-		<button type="submit">Iniciar Sesión</button>
-	</form>
+
+	<footer class="wrapper">
+		<p>¿No tienes una cuenta?</p>
+		<a href="/rol">Registrarse</a>
+	</footer>
 </div>
 
-<footer class="wrapper">
-	<p>¿No tienes una cuenta?</p>
-	<a href="/rol">Registrarse</a>
-</footer>
-
 <style>
+	.main {
+		@apply min-h-screen w-full ml-20 p-2 grid place-items-center;
+	}
+
 	.wrapper {
 		@apply flex justify-center items-center flex-col;
 	}
@@ -62,7 +68,7 @@
 	}
 
 	input {
-		@apply rounded-3xl border-none w-full h-6 pl-3 font-semibold; 
+		@apply rounded-3xl border-none w-full h-6 pl-3 font-semibold;
 		font-family: Montserrat;
 		color: var(--verde_oscuro);
 	}

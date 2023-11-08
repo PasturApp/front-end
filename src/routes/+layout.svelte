@@ -2,7 +2,7 @@
 	import './index.css';
 	import Navbar from './components/navbar.svelte';
 	import Hamburger from './components/hamburger.svelte';
-
+	import { page } from '$app/stores';
 	// export let data; // <--
 	let authenticated = true;
 </script>
@@ -20,15 +20,19 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 </svelte:head>
 
-<div class:user-in={authenticated}>
-	{#if authenticated}
-		<Navbar />
-		<Hamburger />
-	{/if}
-	<main class="main">
-		<slot />
-	</main>
-</div>
+{#if ['/landing', '/registro', '/rol', '/inicio_sesion'].includes($page.url.pathname)}
+	<slot />
+{:else}
+	<div class:user-in={authenticated}>
+		{#if authenticated}
+			<Navbar />
+			<Hamburger />
+		{/if}
+		<main class="main">
+			<slot />
+		</main>
+	</div>
+{/if}
 
 <style lang="css">
 	.user-in {
