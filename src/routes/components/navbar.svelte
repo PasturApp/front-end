@@ -1,5 +1,5 @@
-<nav class="navbar">
-	<ul class="navbar-nav">
+<nav class="nav_bar">
+	<ul class="nav_bar-nav">
 		<li class="logo">
 			<a href="/" class="nav-link">
 				<svg width="2.5em" height="2.5em" viewBox="0 0 80 80" fill="none">
@@ -241,14 +241,14 @@
 </nav>
 
 <style lang="css">
-	.navbar {
+	.nav_bar {
 		@apply w-20 fixed hidden min-h-screen;
 		@apply md:block md:fixed;
 		background-color: var(--verde_primario);
 		transition: width 200ms ease;
 	}
 
-	.navbar:hover .logo .nav-link {
+	.nav_bar:hover .logo .nav-link {
 		@apply grid place-items-center p-0 filter-none;
 		background-color: var(--verde_oscuro);
 	}
@@ -258,11 +258,11 @@
 		font-family: var(--letra_logo);
 	}
 
-	.navbar:hover .logo .nav-link span {
+	.nav_bar:hover .logo .nav-link span {
 		@apply block;
 	}
 
-	.navbar-nav {
+	.nav_bar-nav {
 		@apply flex list-none flex-col h-full;
 	}
 
@@ -295,7 +295,7 @@
 		margin: 0 1rem;
 	}
 
-	.navbar:hover .link-text {
+	.nav_bar:hover .link-text {
 		@apply block;
 	}
 </style>

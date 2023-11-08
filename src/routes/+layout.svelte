@@ -43,11 +43,11 @@
 		@apply min-h-screen w-full ml-20 p-2 grid place-items-center;
 	}
 
-	:global(.navbar):hover .main {
+	:global(.nav_bar):hover .main {
 		width: 60%;
 	}
 
-	:global(.navbar):hover {
+	:global(.nav_bar):hover {
 		width: 40% !important;
 	}
 
