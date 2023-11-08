@@ -1,225 +1,224 @@
 <script>
 	import './index.css';
-	import Calendar from 'color-calendar';
-	import 'color-calendar/dist/css/theme-basic.css';
-	import 'color-calendar/dist/css/theme-glass.css';
+	import Chart from 'chart.js/auto';
 	import { onMount } from 'svelte';
-	import Icons from './icons.svelte';
-	import { format } from 'date-fns';
+	import Recommendations from './components/recommendations.svelte';
+	Chart.defaults.font.family = 'Montserrat';
+	Chart.defaults.font.weight = 'bold';
+
+	// import Swiper bundle with all modules installed
+	import Swiper from 'swiper/bundle';
+
+	// import styles bundle
+	import 'swiper/css/bundle';
+
+	let swiper; // Define a variable to hold the Swiper instance
 
 	export let data;
-	console.log(data);
 	const establecimiento = data.dashboard[0];
 	const plataforma = data.dashboard[1];
+
 	onMount(() => {
-		new Calendar({
-			theme: 'glass',
-			id: '#color-calendar',
-			eventsData: [
-				{
-					id: 1,
-					name: 'French class',
-					start: '2023-11-17T06:00:00',
-					end: '2023-11-17T20:30:00'
-				}
-			],
-			primaryColor: '#528A3F',
-			headerColor: '#F5FFFA',
-			headerBackgroundColor: '#3F6F37',
-			weekdaysColor: '#0C523B',
-			dateChanged: (currentDate, events) => {
-				const divElements = document.getElementsByClassName('fecha');
-				if (divElements.length > 0) {
-					const shortDate = format(currentDate, 'dd/MM/yyyy');
-					divElements[0].innerHTML = `<p>${shortDate}</p>`;
-					events.forEach((event) => {
-						const toDate = new Date(event.start);
-						const shortDate = format(toDate, 'dd/MM/yyyy');
-						divElements[0].innerHTML = `<p>${shortDate}</p>`;
-						divElements[0].innerHTML += `<p>${event.name}</p>`;
-					});
-				}
+		swiper = new Swiper('.swiper', {
+			// Optional parameters
+			loop: true,
+			autoHeight: true,
+
+			// If we need pagination
+			pagination: {
+				el: '.swiper-pagination'
+			},
+
+			// Navigation arrows
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev'
 			}
-			// selectedDateClicked: (currentDate, filteredMonthEvents) => {
-			// 	console.log('clicked slected date', currentDate, filteredMonthEvents);
-			// }
+		});
+		data.charts.forEach(({ canvaId, type, data, options }) => {
+			const canva = document.getElementById(canvaId);
+
+			new Chart(canva, {
+				type: type,
+				data: data,
+				options: options
+			});
 		});
 	});
-	let newItem = '';
-	let todoList = [];
-
-	function removeFromList(index) {
-		todoList.splice(index, 1);
-		todoList = todoList;
-	}
-
-	function addTodo() {
-		if (newItem !== '') {
-			todoList = [
-				...todoList,
-				{
-					task: newItem,
-					completed: false
-				}
-			];
-			newItem = '';
-		}
-
-		console.log(todoList);
-	}
 </script>
 
+<div class="header">
+	<h1>¡Bienvenido!</h1>
+</div>
 <div class="wrapper">
-	<div class="izquierda">
-		<div class="datos">
-			<div class="establecimiento">
-				<div>
-					<h1>Datos del establecimiento</h1>
+	<section class="izquierda">
+		<article class="establecimiento">
+			<header>
+				<h2>Datos del establecimiento</h2>
+			</header>
+			<div class="datos-resumen">
+				<div class="recuadro">
+					<h3>Fecha:</h3>
+					<p>{establecimiento.mes}</p>
 				</div>
-				<div class="datos-lista">
-					<ul>
-						<li>Última actualización: {establecimiento.mes}</li>
-						<li>N° de vacas: {establecimiento.vacas}</li>
-						<li>PV: {establecimiento.pv} kg/VO</li>
-						<li>Producción individual: {establecimiento.produccion} lt/VO</li>
-						<li>Carga: {establecimiento.carga} VO/haSEP</li>
-					</ul>
-				</div>
-			</div>
-			<div class="plataforma">
-				<div>
-					<h1>Plataforma de pastoreo</h1>
-				</div>
-				<div class="datos-lista">
-					<ul>
-						<li>Fecha: {plataforma.fecha}</li>
-						<li>TC: {plataforma.tc} kgMS/ha</li>
-						<li>Demanda: {plataforma.demanda} kgMS/ha</li>
-						<li>Stock: {plataforma.stock} kgMS/ha</li>
-					</ul>
+				<div class="recuadro">
+					<h3>Carga:</h3>
+					<p>
+						{establecimiento.carga} VO/haSEP
+					</p>
 				</div>
 			</div>
-		</div>
-		<div class="container">
+		</article>
+		<article class="produccion">
+			<header>
+				<h2>Datos de producción</h2>
+			</header>
+			<div class="datos-resumen">
+				<div class="recuadro">
+					<h3>Producción individual:</h3>
+					<p>{establecimiento.produccion} lt/VO</p>
+				</div>
+				<div class="recuadro">
+					<h3>Productividad:</h3>
+					<p>{establecimiento.productividad} lt/ha/mes</p>
+				</div>
+			</div>
+		</article>
+		<article class="plataforma">
 			<div>
-				<h1>Lista de tareas</h1>
-				<form on:submit|preventDefault={addTodo}>
-					<input
-						bind:value={newItem}
-						type="task"
-						class="todos__input"
-						placeholder="Agregar tarea"
-					/>
-					<button class="todos__button">+</button>
-				</form>
-				{#each todoList as item, index}
-					<div class="todo">
-						<span class={`todo__text ${item.completed ? 'todo__checked--strike' : ''}`}
-							>{item.task}</span
-						>
-						<div class="icons">
-							<button class="icon__button" on:click={() => (item.completed = !item.completed)}>
-								<Icons name="check-mark" class="icon" />
-							</button>
+				<h2>Plataforma de pastoreo</h2>
+			</div>
+			<div class="datos-resumen">
+				<div class="recuadro">
+					<h3>Oferta:</h3>
+					<p>{plataforma.tc} kgMS/ha/d</p>
+				</div>
+				<div class="recuadro">
+					<h3>Demanda:</h3>
+					<p>{plataforma.demanda} kgMS/ha/d</p>
+				</div>
+			</div>
+		</article>
+	</section>
 
-							<button class="icon__button" on:click={() => removeFromList(index)}>
-								<Icons name="delete" class="icon" />
-							</button>
+	<section class="derecha">
+		<div class="swiper">
+			<!-- Additional required wrapper -->
+			<div class="swiper-wrapper">
+				<!-- Slides -->
+				{#each data.charts as grafica}
+					<div class="swiper-slide">
+						<div class="wrap">
+							<div class="grafica">
+								<canvas id={grafica.canvaId} />
+							</div>
+							{#if grafica.title === 'Stock' || grafica.title === 'Pastoreo'}
+								<div class="recomendaciones">
+									<h2>Recomendaciones:</h2>
+									<Recommendations {grafica} />
+								</div>
+							{/if}
 						</div>
 					</div>
 				{/each}
 			</div>
+			<!-- If we need pagination -->
+			<div class="swiper-pagination" />
+
+			<!-- If we need navigation buttons -->
+			<div class="swiper-button-prev" />
+			<div class="swiper-button-next" />
 		</div>
-	</div>
-	<div class="derecha">
-		<div class="calendario" id="color-calendar" />
-		<div class="evento">
-			<div>
-				<h1 class="addEvent">Eventos</h1>
-				<button class="addEvent">+</button>
-			</div>
-			<div class="fecha" />
-		</div>
-	</div>
+	</section>
 </div>
 
 <style lang="postcss">
 	.wrapper {
-		@apply mt-14 w-full md:mt-0 md:w-3/4 lg:w-full lg:grid lg:gap-3;
-		grid-template-columns: 2fr 1fr;
+		@apply w-96 md:mt-0 md:w-3/4 lg:w-full lg:grid lg:gap-14 px-3;
+		grid-template-columns: 1fr 1fr;
 	}
 
-	.izquierda {
-		@apply lg:grid lg:gap-1;
+	.wrap {
+		@apply flex flex-col justify-center items-center gap-2;
 	}
 
-	.datos {
-		@apply w-full lg:grid lg:gap-3 lg:row-start-1 lg:row-end-2;
+	.swiper {
+		@apply hidden md:block md:max-w-2xl lg:max-w-5xl pb-7;
 	}
 
 	.establecimiento {
-		@apply lg:col-start-1 lg:col-end-2;
+		@apply mt-2;
+	}
+
+	.grafica {
+		@apply mt-4 pt-4 h-96 p-5 w-3/4 rounded-xl;
+		background-color: var(--verde_fondos);
+	}
+
+	p {
+		@apply text-2xl;
+		font-family: var(--letra_titulo);
+	}
+
+	.izquierda {
+		@apply lg:col-start-1 lg:col-end-2 flex flex-col justify-center;
+	}
+
+	.derecha {
+		@apply lg:col-start-2 lg:col-end-4 flex justify-center items-center;
+	}
+
+	.header {
+		@apply w-56 md:w-fit flex flex-col justify-center p-3 rounded-xl;
 	}
 
 	h1 {
+		@apply md:text-5xl text-center;
+		font-family: var(--letra_titulo);
+		color: var(--verde_oscuro);
+	}
+
+	h2 {
 		@apply ml-2;
 		font-family: var(--letra_titulo);
 		color: var(--verde_oscuro);
 	}
 
-	.datos-lista {
-		@apply pl-8 rounded-xl;
-		background-color: var(--verde_secundario);
+	h3 {
+		@apply ml-2 text-xs;
+		color: var(--verde_primario);
 	}
 
-	.container div {
-		@apply p-4 lg:row-start-2 lg:row-end-3;
+	.swiper-button-prev,
+	.swiper-button-next {
+		color: var(--verde_secundario);
 	}
 
-	.datos-lista {
-		@apply h-36;
-		line-height: 150px;
+	.titulo {
+		@apply flex justify-center;
 	}
 
-	ul {
-		@apply list-disc inline-block align-middle leading-normal;
-	}
+	.titulo h1 {
+		@apply rounded-2xl w-1/3 py-2 text-center text-xl font-semibold;
 
-	li {
-		font-family: var(--letra_titulo);
-		color: var(--blanco_fondo);
-	}
-
-	.plataforma {
-		@apply lg:col-start-2 lg:col-end-3;
-	}
-
-	.derecha {
-		@apply lg:grid gap-3;
-	}
-
-	.calendario {
-		@apply hidden;
-		@apply lg:block lg:row-start-1 lg:row-end-2;
-	}
-
-	.evento {
-		@apply w-full xl:w-96 lg:row-start-2 lg:row-end-3;
-	}
-
-	.fecha {
-		@apply p-6 pl-8 rounded-xl text-2xl;
 		background-color: var(--verde_secundario);
 		font-family: var(--letra_titulo);
-		color: var(--blanco_fondo);
-	}
-	.container h1 {
-		@apply text-4xl;
-		color: var(--verde_oscuro);
+		color: var(--verde_fondos);
 	}
 
-	.container {
-		@apply h-60 md:h-96 overflow-y-scroll;
+	.recomendaciones {
+		@apply mt-2 px-5 py-3 h-fit rounded-xl w-3/4 text-justify;
+		background-color: var(--verde_fondos);
+	}
+
+	.datos-resumen {
+		@apply flex flex-row text-xl justify-around text-center rounded-xl p-4 mb-4;
+		color: var(--verde_primario);
+		background-color: #cfe9d4;
+	}
+
+	.recuadro {
+		@apply p-4 rounded-xl;
 	}
 
 	.container::-webkit-scrollbar {
@@ -257,55 +256,5 @@
 	}
 	.container::-webkit-scrollbar-corner {
 		background: transparent;
-	}
-	.todos__input {
-		@apply w-2/3;
-		background-color: inherit;
-		border: none;
-		box-shadow: none;
-		text-decoration: none;
-		font-size: 1.2rem;
-		border-bottom: 1px solid var(--verde_oscuro);
-		margin-top: 15px;
-		outline: none;
-	}
-	.todos__button {
-		background-color: inherit;
-		border: none;
-		box-shadow: none;
-		font-size: 1.2rem;
-		cursor: pointer;
-	}
-	.todo {
-		@apply flex p-4 h-12 rounded-2xl w-10 text-lg font-extrabold;
-
-		box-shadow: 0 0 15px rgb(12 82 59 / 20%);
-		background-color: hsla(0, 0%, 100%, 0.2);
-		color: var(--verde_oscuro);
-		-webkit-backdrop-filter: blur(25px);
-		backdrop-filter: blur(25px);
-		width: inherit;
-		margin-top: 15px;
-		justify-content: space-between;
-		align-items: center;
-	}
-	.icon__button {
-		background-color: transparent;
-		border: none;
-		box-shadow: none;
-		font-size: 1.2rem;
-		cursor: pointer;
-		color: rgba(0, 0, 0, 0.54);
-	}
-
-	.todo__checked--strike {
-		text-decoration: line-through;
-	}
-
-	.addEvent {
-		@apply inline;
-	}
-	button.addEvent {
-		@apply float-right;
 	}
 </style>
