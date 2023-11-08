@@ -127,6 +127,34 @@
 			</a>
 		</li>
 
+		<!-- <li class="nav-item">
+			<a href="/graficas" class="nav-link">
+				<svg
+					width="2em"
+					height="2em"
+					viewBox="0 0 128 128"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+					xmlns:xlink="http://www.w3.org/1999/xlink"
+				>
+					<rect width="128" height="128" transform="matrix(-1 0 0 1 128 0)" fill="url(#pattern4)" />
+					<defs>
+						<pattern id="pattern4" patternContentUnits="objectBoundingBox" width="1" height="1">
+							<use xlink:href="#image0_123_606" transform="scale(0.01)" />
+						</pattern>
+						<image
+							id="image0_123_606"
+							width="100"
+							height="100"
+							xlink:href="data:image/png;base64,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"
+						/>
+					</defs>
+				</svg>
+
+				<span class="link-text">Gráficas</span>
+			</a>
+		</li> -->
+
 		<li class="nav-item">
 			<a href="/visualizador_datos" class="nav-link">
 				<svg
@@ -215,7 +243,7 @@
 <style lang="css">
 	.navbar {
 		@apply w-20 fixed hidden min-h-screen;
-		@apply md:block;
+		@apply md:block md:fixed;
 		background-color: var(--verde_primario);
 		transition: width 200ms ease;
 	}
