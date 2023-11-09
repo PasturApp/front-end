@@ -1,3 +1,11 @@
+<script>
+  import { goto } from '$app/navigation';
+
+  function goTo() {
+    goto('/');
+  }
+</script>
+
 <section id="product">
   <article class="product-description">
     <h2 class="heading">¿Qué es PasturApp?</h2>
@@ -8,16 +16,16 @@
       la aplicación suponen un respaldo tanto para asesores como para
       productores en la toma de decisiones.
     </p>
-    <button class="go-to-app">Ir a la App</button>
+    <button class="go-to-app" on:click={goTo}>Ir a la App</button>
   </article>
-  <div class="product-overview">
+  <article class="product-overview">
     <img src="/overview.png" alt="product overview" />
-  </div>
+  </article>
 </section>
 
 <style lang="postcss">
   #product {
-    @apply relative flex flex-col md:flex-row justify-between gap-20 items-center py-36 px-20 xl:py-28;
+    @apply relative flex flex-col md:flex-row justify-between gap-20 items-center py-28 px-20 xl:py-28;
   }
 
   #product > * {
@@ -46,6 +54,7 @@
 
   .go-to-app:hover {
     background-color: var(--primary-green);
+    transform: scale(1.1);
   }
 
   .product-overview {

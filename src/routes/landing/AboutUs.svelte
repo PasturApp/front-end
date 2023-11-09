@@ -139,7 +139,6 @@
   <article>
     <h2 class="heading">Sobre nosotros</h2>
     <div class="divider"><img src="/icons/grass.svg" alt="grass icon" /></div>
-    <!--Team information-->
     <div class="team-info">
       <div>
         <p class="default-text">
@@ -163,15 +162,11 @@
       </div>
       <img src="/team-photo.jpg" alt="team" />
     </div>
-    <!--Personal cards-->
-    <div class="personal-info">
-      {#each dataCardsAboutUs as card}
-        <CardAboutUs {card} />
-      {/each}
-    </div>
-    <div class="footer">
-      <img src="/icons/pasturapp-logo.png" alt="logo" />
-    </div>
+  </article>
+  <article class="personal-info">
+    {#each dataCardsAboutUs as card}
+      <CardAboutUs {card} />
+    {/each}
   </article>
 </section>
 
@@ -186,7 +181,7 @@
   }
 
   #about-us {
-    @apply relative flex justify-center items-center pt-20 pb-14 px-20;
+    @apply relative justify-center items-center pt-20 pb-14 px-20;
     background: url('/gradient-background.png');
     background-size: cover;
   }
@@ -262,7 +257,7 @@
   }
 
   .personal-info {
-    @apply flex flex-col items-center md:grid md:justify-items-center md:grid-cols-2 lg:grid-cols-3 lg:gap-0 xl:grid-cols-3 2xl:grid-cols-5;
+    @apply flex flex-col items-center md:grid md:justify-items-center md:grid-cols-2 lg:grid-cols-5 md:gap-20;
   }
 
   .details {
@@ -280,13 +275,5 @@
 
   .details p {
     @apply text-sm;
-  }
-
-  .footer {
-    @apply flex justify-center items-center pt-10;
-  }
-
-  .footer img {
-    @apply w-20 md:w-28;
   }
 </style>
