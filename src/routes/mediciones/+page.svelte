@@ -25,7 +25,7 @@
 		<div>
 			<h2>Estado</h2>
 
-			{#each ['Pastoreo', 'Remanente', 'Reserva', 'Barbecho'] as estado}
+			{#each ['Pastoreo', 'Reserva', 'Barbecho'] as estado}
 				<div class="opciones">
 					<input type="radio" value={estado} bind:group={estados} />
 					<label class="opciones" for="estado">{estado}</label>
@@ -35,7 +35,7 @@
 		<div>
 			<h2>¿En Pastoreo?</h2>
 
-			{#each ['Si', 'No'] as opciones}
+			{#each ['Si', 'No', 'Remanente'] as opciones}
 				<label class="opciones" for="opciones">
 					<input type="radio" value={opciones} bind:group={ops} />
 					{opciones}
