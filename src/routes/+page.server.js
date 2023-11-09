@@ -14,8 +14,6 @@ export async function load() {
   const valorespastureY = pasture.map(lista => lista[1]);
   console.log("Dashboard Estable:", dashboardEstable);
   console.log("Dashboard Plat:", dashboardPlat);
-  console.log("stock grafica", stock);
-  console.log("pasture grafica", pasture);
   console.log("Valores X de stock:", valoresStockX);
   console.log("Valores Y de stock:", valoresStockY);
   console.log("Valores X de pasture:", valorespastureX);
@@ -45,8 +43,8 @@ export async function load() {
       labels: valorespastureX,
       datasets: [
         {
-          label: 'Potreros',
-          data: valoresStockY,
+          label: 'Disponibilidad',
+          data: valorespastureY,
           borderWidth: 1,
           backgroundColor: ['#0C523B'],
         }
