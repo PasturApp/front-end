@@ -1,4 +1,34 @@
 <script>
+	// Función para manejar el evento del formulario
+	async function loginUser(event) {
+		event.preventDefault(); // Prevenir el envío del formulario por defecto
+
+		const email = document.getElementById("email").value;
+		const password = document.getElementById("contraseña").value;
+
+		try {
+			const response = await fetch("/api/login", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ email, password }),
+			});
+
+			if (response.ok) {
+				window.location.href = "http://localhost:5173/cuenta";
+			} else {
+				const errorMessage = await response.text();
+				console.log("Error en el inicio de sesión:", errorMessage);
+
+				// Limpiar los campos de texto si es necesario
+				document.getElementById("email").value = "";
+				document.getElementById("contraseña").value = "";
+			}
+		} catch (error) {
+			console.error("Error en la solicitud:", error);
+		}
+	}
 </script>
 
 <div class="main">
@@ -12,14 +42,24 @@
 				src="images/logoynombre.png"
 			/>
 		</div>
-		<form>
+		<form on:submit={loginUser}>
 			<div>
 				<label for="email">Email</label><br />
-				<input type="text" id="email" name="email" placeholder="email@ejemplo.com" />
+				<input
+					type="text"
+					id="email"
+					name="email"
+					placeholder="email@ejemplo.com"
+				/>
 			</div>
 			<div>
 				<label for="contraseña">Contraseña</label><br />
-				<input type="password" id="contraseña" name="constraseña" placeholder="••••••••••" />
+				<input
+					type="password"
+					id="contraseña"
+					name="contraseña"
+					placeholder="••••••••••"
+				/>
 			</div>
 			<button type="submit">Iniciar Sesión</button>
 		</form>
@@ -77,7 +117,7 @@
 		outline-color: var(--verde_oscuro);
 	}
 
-	input[type='password'] {
+	input[type="password"] {
 		font-size: 17px;
 	}
 

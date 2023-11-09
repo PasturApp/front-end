@@ -1,16 +1,16 @@
 <script>
-	import './index.css';
-	import Chart from 'chart.js/auto';
-	import { onMount } from 'svelte';
-	import Recommendations from './components/recommendations.svelte';
-	Chart.defaults.font.family = 'Montserrat';
-	Chart.defaults.font.weight = 'bold';
+	import "./index.css";
+	import Chart from "chart.js/auto";
+	import { onMount } from "svelte";
+	import Recommendations from "./components/recommendations.svelte";
+	Chart.defaults.font.family = "Montserrat";
+	Chart.defaults.font.weight = "bold";
 
 	// import Swiper bundle with all modules installed
-	import Swiper from 'swiper/bundle';
+	import Swiper from "swiper/bundle";
 
 	// import styles bundle
-	import 'swiper/css/bundle';
+	import "swiper/css/bundle";
 
 	let swiper; // Define a variable to hold the Swiper instance
 
@@ -19,21 +19,21 @@
 	const plataforma = data.dashboard[1];
 
 	onMount(() => {
-		swiper = new Swiper('.swiper', {
+		swiper = new Swiper(".swiper", {
 			// Optional parameters
 			loop: true,
 			autoHeight: true,
 
 			// If we need pagination
 			pagination: {
-				el: '.swiper-pagination'
+				el: ".swiper-pagination",
 			},
 
 			// Navigation arrows
 			navigation: {
-				nextEl: '.swiper-button-next',
-				prevEl: '.swiper-button-prev'
-			}
+				nextEl: ".swiper-button-next",
+				prevEl: ".swiper-button-prev",
+			},
 		});
 		data.charts.forEach(({ canvaId, type, data, options }) => {
 			const canva = document.getElementById(canvaId);
@@ -41,7 +41,7 @@
 			new Chart(canva, {
 				type: type,
 				data: data,
-				options: options
+				options: options,
 			});
 		});
 	});
@@ -112,7 +112,7 @@
 							<div class="grafica">
 								<canvas id={grafica.canvaId} />
 							</div>
-							{#if grafica.title === 'Stock' || grafica.title === 'Pastoreo'}
+							{#if grafica.title === "Stock" || grafica.title === "Pastoreo"}
 								<div class="recomendaciones">
 									<h2>Recomendaciones:</h2>
 									<Recommendations {grafica} />
@@ -174,7 +174,7 @@
 
 	h1 {
 		@apply md:text-5xl text-center;
-		font-family: 'comfortaa';
+		font-family: "comfortaa";
 		color: var(--verde_oscuro);
 	}
 

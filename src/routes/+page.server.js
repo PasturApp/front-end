@@ -1,32 +1,52 @@
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
+  const endpoints = [
+    "http://localhost:5000/api/dashboard_estable",
+    "http://localhost:5000/api/dashboard_plat",
+    "http://localhost:5000/api/stock_table",
+    "http://localhost:5000/api/grafica_pastoreo"
+  ]
+  const requests = endpoints.map(endpoint => fetchData(endpoint));
+  const [dashboardEstable, dashboardPlat, stock, pasture] = await Promise.all(requests);
+  const valoresStockY = stock.map(lista => lista[0]);
+  const valoresStockX = stock.map(lista => lista[1]);
+  const valorespastureX = pasture.map(lista => lista[0]);
+  const valorespastureY = pasture.map(lista => lista[1]);
+  console.log("Dashboard Estable:", dashboardEstable);
+  console.log("Dashboard Plat:", dashboardPlat);
+  console.log("stock grafica", stock);
+  console.log("pasture grafica", pasture);
+  console.log("Valores X de stock:", valoresStockX);
+  console.log("Valores Y de stock:", valoresStockY);
+  console.log("Valores X de pasture:", valorespastureX);
+  console.log("Valores Y de pasture:", valorespastureY);
   const dashboard = [{
-    mes: 'Septiembre',
-    produccion: 25,
-    carga: 1.25,
-    productividad: 953
+    mes: dashboardEstable[0],
+    produccion: dashboardEstable[1],
+    carga: dashboardEstable[2],
+    productividad: dashboardEstable[3]
   },
   {
-    tc: 40,
-    demanda: 35,
+    tc: dashboardPlat[0],
+    demanda: dashboardPlat[0] - dashboardEstable[2],
   }]
 
   const data = [
     {
-      labels: ['3/8/23', '18/8/23', '2/9/23', '17/9/23', '1/10/23'],
+      labels: valoresStockX,
       datasets: [
         {
           label: 'Stock',
-          data: [2750, 2300, 2650, 2500, 2700]
+          data: valoresStockY
         }
       ]
     },
     {
-      labels: ['1A', '3E', '3F', '6D', '6A', '4A'],
+      labels: valorespastureX,
       datasets: [
         {
           label: 'Potreros',
-          data: [3680, 3500, 2800, 2750, 2200, 1800],
+          data: valoresStockY,
           borderWidth: 1,
           backgroundColor: ['#0C523B'],
         }
@@ -276,4 +296,11 @@ export async function load() {
     }
   ];
   return { dashboard, charts }
-} 
+}
+async function fetchData(url) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`DATA GET ERROR: ${response.status} ${response.statusText}`);
+  }
+  return response.json();
+}
