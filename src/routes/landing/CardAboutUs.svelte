@@ -25,7 +25,7 @@
   </div>
   <div class="card-actions">
     {#each card.links as link}
-      <a href={link.href}>
+      <a href={link.href} target="_blank">
         <li><img src={link.icon} alt={link.alt} /></li>
       </a>
     {/each}
@@ -34,7 +34,7 @@
 
 <style lang="postcss">
   .card {
-    @apply flex flex-col items-center justify-center h-auto w-80 p-4 m-4;
+    @apply flex flex-col items-center justify-center h-full w-80 p-4 m-4;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
   }
@@ -62,6 +62,10 @@
 
   .card-actions {
     @apply flex justify-end gap-2 pb-3;
+  }
+
+  .card-body p {
+    @apply flex flex-col items-center justify-center gap-2 text-center;
   }
 
   li {
