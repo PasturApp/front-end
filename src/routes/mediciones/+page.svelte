@@ -1,9 +1,112 @@
 <script>
-	let estados = [];
-	let ops = [];
-	export let data;
+  import { onMount } from 'svelte';
 
-	const formatter = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' });
+  let data = {
+    potreros: [],
+    metodoUtilizado: '',
+  };
+
+	let selectedPotrero = '';
+  let estados = '';
+  let ops = '';
+
+  async function fetchData() {
+    let uuidCookie = document.cookie
+      .split('; ')
+      .find((row) => row.startsWith('uuid='))
+      ?.split('=')[1];
+    uuidCookie = uuidCookie ? uuidCookie.split(',')[0] : null;
+
+    if (uuidCookie) {
+      try {
+        const response1 = await fetch(
+          `http://127.0.0.1:5000/api/user/${uuidCookie}/mediciones_pastureName`
+        );
+
+        if (!response1.ok) {
+          throw new Error('Failed to fetch measurements data');
+        }
+
+        const measurementsData = await response1.json();
+        data.potreros = measurementsData; // Lista de os padoques
+
+        // Fetch data from /api/user/<uuid>/dashboard_estable for the method only (inefficient)
+        const response2 = await fetch(
+          `http://127.0.0.1:5000/api/user/${uuidCookie}/dashboard_estable`
+        );
+
+        if (!response2.ok) {
+          throw new Error('Failed to fetch dashboard_estable data');
+        }
+
+        const dashboardData = await response2.json();
+        data.metodoUtilizado = dashboardData.method_estable; // EL metodo
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    } else {
+      window.location.href = '/inicio_sesion';
+    }
+  }
+
+  onMount(async () => {
+    await fetchData();
+  });
+
+	function handleSubmit() {
+    // Check for cookie (logged in basically)
+    let uuidCookie = document.cookie
+      .split('; ')
+      .find((row) => row.startsWith('uuid='))
+      ?.split('=')[1];
+    uuidCookie = uuidCookie ? uuidCookie.split(',')[0] : null;
+
+    if (!uuidCookie) {
+      // log in pls
+      window.location.href = '/inicio_sesion';
+      return;
+    }
+
+    // Capture form data
+    const date = document.getElementById('date').value;
+    const estado = estados;
+    const enPastoreo = ops;
+    const disponibilidad = document.getElementById('disponibiliad').value;
+		const potreroDropdown = document.querySelector('select[name="select"]');
+		selectedPotrero = potreroDropdown.options[potreroDropdown.selectedIndex]?.text;
+
+		console.log(selectedPotrero);
+
+    const payload = {
+      potrero: selectedPotrero,
+      date,
+      estado,
+      enPastoreo,
+      disponibilidad,
+      metodoUtilizado: data.metodoUtilizado,
+    };
+
+    // Send an HTTP POST request to the API
+    fetch(`http://127.0.0.1:5000/api/user/${uuidCookie}/upload_medicion`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to upload data');
+        }
+        return response.json();
+      })
+      .then((responseData) => {
+        console.log('Upload successful:', responseData);
+      })
+      .catch((error) => {
+        console.error('Error uploading data:', error);
+      });
+  }
 </script>
 
 <div>
@@ -14,13 +117,13 @@
 			<select name="select">
 				<option value="" disabled selected>Seleccionar...</option>
 				{#each data.potreros as potrero}
-					<option value="value1">{potrero}</option>
+					<option value="value1">{potrero.name_pasture}</option>
 				{/each}
 			</select>
 		</div>
 		<div>
-			<label for="Fecha">Fecha</label><br />
-			<input type="date" id="Fecha" name="Fecha" />
+			<label for="date">Fecha</label><br />
+			<input type="date" id="date" name="date" />
 		</div>
 		<div>
 			<h2>Estado</h2>
@@ -43,7 +146,7 @@
 			{/each}
 		</div>
 		<div class="Disponibilidad">
-			<div>
+			<div><p>Disponibilidad</p>
 				{#if data.metodoUtilizado === 'visual'}
 					<label for="disponibilidad">Disponibilidad (kg/ha)</label>
 				{:else if data.metodoUtilizado === 'plato'}
@@ -55,8 +158,7 @@
 			</div>
 		</div>
 
-		<button type="submit">Ingresar</button>
-	</form>
+		<button type="submit" on:click={handleSubmit}>Ingresar</button>	</form>
 </div>
 
 <style lang="css">
