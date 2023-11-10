@@ -1,4 +1,47 @@
 <script>
+	import { onMount } from 'svelte';
+	// Función para manejar el evento del formulario
+
+	async function registerUser(event) {
+		event.preventDefault(); // Prevenir el envío del formulario por defecto
+
+		const email = document.getElementById("email").value;
+		const password = document.getElementById("pass").value;
+		const confirm_password = document.getElementById("confirmar").value;
+		const firstname = document.getElementById("nombre").value;
+		const lastname = document.getElementById("apellido").value;
+		const telephone = document.getElementById("celular").value;
+
+
+
+
+		if (password == confirm_password) {
+			const response = await fetch("http://127.0.0.1:5000/api/register", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+
+			},
+			body: JSON.stringify({ email, password, firstname, lastname, telephone}),
+		})
+		.then(response=> {
+			if (!response.ok) {
+				throw new Error("Not OK :(");
+			}
+			return response.json();
+		})
+		.then(data => {
+			let jsonData = data;
+			document.cookie = `uuid=${jsonData}`; // Might have to set Path=/ so that it persists through all pages and not just that specific url
+			window.location.href = "http://localhost:5173/cuenta";
+		})
+		.catch(error => console.error('Error', error))
+		;}}
+
+		onMount(async () => {
+			// Im gonna assume if you're registering you have no problem being logged out of prev session
+			document.cookie = 'uuid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+		})
 </script>
 
 <div class="main">
@@ -28,8 +71,8 @@
 				<input type="text" id="email" name="email" placeholder="email@ejemplo.com" />
 			</div>
 			<div>
-				<label for="constraseña">Contraseña</label><br />
-				<input type="password" id="constraseña" name="constraseña" placeholder="••••••••••" />
+				<label for="pass">Contraseña</label><br />
+				<input type="password" id="pass" name="pass" placeholder="••••••••••" />
 			</div>
 			<div>
 				<label for="confirmar">Confirmar Contraseña</label><br />
@@ -39,7 +82,7 @@
 				<label for="celular">Celular</label><br />
 				<input type="int" id="celular" name="celular" value="+598" />
 			</div>
-			<button type="submit">Registrarse</button>
+			<button type="submit" on:click={registerUser}>Registrarse</button>
 		</form>
 	</div>
 
