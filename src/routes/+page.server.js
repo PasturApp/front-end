@@ -1,10 +1,29 @@
 /** @type {import('./$types').PageServerLoad} */
+import { onMount } from 'svelte';
+
+let uuidCookie;
+
+onMount(() => {
+  // Check if logged in
+  uuidCookie = document.cookie
+    .split('; ')
+    .find((row) => row.startsWith('uuid='))
+    ?.split('=')[1];
+  uuidCookie = uuidCookie ? uuidCookie.split(',')[0] : null;
+
+  if (!uuidCookie) {
+    // Redirect if not logged in
+    window.location.href = '/inicio_sesion';
+  }
+})
+
 export async function load() {
+
   const endpoints = [
-    `http://localhost:5000/api/user/${uuid}/dashboard_estable`,
-    `http://localhost:5000/api/dashboard_plat`,
-    `http://localhost:5000/api/stock_table`,
-    `http://localhost:5000/api/grafica_pastoreo`
+    `http://localhost:5000/api/user/${uuidCookie}/dashboard_estable`,
+    `http://localhost:5000/api/user/${uuidCookie}/dashboard_plat`,
+    `http://localhost:5000/api/user/${uuidCookie}/stock_table`,
+    `http://localhost:5000/api/user/${uuidCookie}/grafica_pastoreo`
   ]
   const requests = endpoints.map(endpoint => fetchData(endpoint));
   const [dashboardEstable, dashboardPlat, stock, pasture] = await Promise.all(requests);
