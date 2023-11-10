@@ -1,6 +1,14 @@
 <script>
   import { onMount } from 'svelte';
 
+	function closeSession() {
+    // Delete the 'uuid' cookie
+    document.cookie = 'uuid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+
+    // Redirect to the login page
+    window.location.href = '/inicio_sesion'; // Adjust the URL as needed
+  }
+
   let usuario = {
     nombre: '',
     apellido: '',
@@ -36,12 +44,13 @@
         usuario.email = data.mail_prod;
         usuario.celular = data.tel_prod;
 
-        console.log(usuario);
       } catch (error) {
         console.error('Error', error);
         // Handle errors as needed
       }
-    }
+    } else {
+			window.location.href = '/inicio_sesion';
+		}
   });
 </script>
 
@@ -79,9 +88,7 @@
 			</div>
 		</div>
 
-		<button class="sesion" id="sesion" type="submit"
-			><a href="/inicio_sesion">Cerrar Sesión</a></button
-		>
+		<button class="sesion" on:click={closeSession}>Cerrar Sesión</button>
 	</form>
 </div>
 

@@ -23,8 +23,7 @@
 		})
 		.then(data => {
 			let jsonData = data;
-			console.log(jsonData);
-			document.cookie = `uuid=${jsonData}, path=/`;
+			document.cookie = `uuid=${jsonData}`; // Might have to set Path=/ so that it persists through all pages and not just that specific url
 			window.location.href = "http://localhost:5173/cuenta";
 		})
 		.catch(error => console.error('Error', error))
