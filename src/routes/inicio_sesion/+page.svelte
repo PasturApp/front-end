@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from 'svelte';
 	// Función para manejar el evento del formulario
 	async function loginUser(event) {
 		event.preventDefault(); // Prevenir el envío del formulario por defecto
@@ -6,28 +7,28 @@
 		const email = document.getElementById("email").value;
 		const password = document.getElementById("contraseña").value;
 
-		try {
-			const response = await fetch("/api/login", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({ email, password }),
-			});
+		const response = await fetch("http://127.0.0.1:5000/api/login", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
 
-			if (response.ok) {
-				window.location.href = "http://localhost:5173/cuenta";
-			} else {
-				const errorMessage = await response.text();
-				console.log("Error en el inicio de sesión:", errorMessage);
-
-				// Limpiar los campos de texto si es necesario
-				document.getElementById("email").value = "";
-				document.getElementById("contraseña").value = "";
+			},
+			body: JSON.stringify({ email, password }),
+		})
+		.then(response=> {
+			if (!response.ok) {
+				throw new Error("Not OK :(");
 			}
-		} catch (error) {
-			console.error("Error en la solicitud:", error);
-		}
+			return response.json();
+		})
+		.then(data => {
+			let jsonData = data;
+			console.log(jsonData);
+			document.cookie = `uuid=${jsonData}, path=/`;
+			window.location.href = "http://localhost:5173/cuenta";
+		})
+		.catch(error => console.error('Error', error))
+		;
 	}
 </script>
 

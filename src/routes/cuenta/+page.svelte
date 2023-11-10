@@ -1,29 +1,72 @@
 <script>
-	export let data;
-	const usuario = data.usuario;
+  import { onMount } from 'svelte';
+
+  let usuario = {
+    nombre: '',
+    apellido: '',
+    email: '',
+    celular: ''
+  };
+
+  onMount(async () => {
+    let uuidCookie = document.cookie
+      .split('; ')
+      .find(row => row.startsWith('uuid='))
+      ?.split('=')[1];
+    uuidCookie = uuidCookie ? uuidCookie.split(',')[0] : null;
+
+    if (uuidCookie) {
+      try {
+        const response = await fetch(`http://127.0.0.1:5000/api/user/id/${uuidCookie}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+        // Directly update the properties of the usuario object
+        usuario.nombre = data.firstname_prod;
+        usuario.apellido = data.lastname_prod;
+        usuario.email = data.mail_prod;
+        usuario.celular = data.tel_prod;
+
+        console.log(usuario);
+      } catch (error) {
+        console.error('Error', error);
+        // Handle errors as needed
+      }
+    }
+  });
 </script>
+
 
 <div>
 	<h1>Tu cuenta</h1>
 	<form>
 		<div class="nombre">
 			<label for="nombre">Nombre</label><br />
-			<input type="text" id="nombre" name="nombre" value={usuario.nombre} />
+			<input type="text" id="nombre" name="nombre" bind:value={usuario.nombre} />
 		</div>
 
 		<div class="apellido">
 			<label for="apellido">Apellido</label><br />
-			<input type="text" id="apellido" name="apellido" value={usuario.apellido} />
+			<input type="text" id="apellido" name="apellido" bind:value={usuario.apellido} />
 		</div>
 
 		<div>
 			<label for="email">Email</label><br />
-			<input type="text" id="email" name="email" value={usuario.email} />
+			<input type="text" id="email" name="email" bind:value={usuario.email} />
 		</div>
 
 		<div>
 			<label for="celular">Celular</label><br />
-			<input type="int" id="celular" name="celular" value="+598 {usuario.celular}" />
+			<input type="text" id="celular" name="celular" bind:value={usuario.celular} />
 		</div>
 
 		<button class="mod" type="submit">Modificar</button>
