@@ -15,7 +15,7 @@
 		<h3>Seleccione su rol:</h3>
 		<div class="botones">
 			<button type="button" onclick="location.href='/registro'">Productor</button>
-			<button type="button" onclick="location.href='/registro'">Asesor</button>
+			<button type="button">Asesor</button>
 		</div>
 	</div>
 </div>

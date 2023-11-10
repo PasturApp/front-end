@@ -1,10 +1,10 @@
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
   const endpoints = [
-    "http://localhost:5000/api/dashboard_estable",
-    "http://localhost:5000/api/dashboard_plat",
-    "http://localhost:5000/api/stock_table",
-    "http://localhost:5000/api/grafica_pastoreo"
+    `http://localhost:5000/api/user/${uuid}/dashboard_estable`,
+    `http://localhost:5000/api/dashboard_plat`,
+    `http://localhost:5000/api/stock_table`,
+    `http://localhost:5000/api/grafica_pastoreo`
   ]
   const requests = endpoints.map(endpoint => fetchData(endpoint));
   const [dashboardEstable, dashboardPlat, stock, pasture] = await Promise.all(requests);

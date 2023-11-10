@@ -75,8 +75,6 @@
 		const potreroDropdown = document.querySelector('select[name="select"]');
 		selectedPotrero = potreroDropdown.options[potreroDropdown.selectedIndex]?.text;
 
-		console.log(selectedPotrero);
-
     const payload = {
       potrero: selectedPotrero,
       date,
