@@ -34,7 +34,7 @@
 	<img src="../images/menu.png" width="30px" height="30px" alt="boton de menu" />
 </label>
 <div class="wrapper">
-	<ul class="menu">
+	<ul class="hamb-menu">
 		{#each opciones as { name, link }}
 			<li><a href={link} on:click={toggleCheckbox}>{name}</a></li>
 		{/each}

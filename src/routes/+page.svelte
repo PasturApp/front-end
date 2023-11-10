@@ -173,7 +173,7 @@
 	}
 
 	h1 {
-		@apply md:text-5xl text-center;
+		@apply text-2xl md:text-5xl text-center;
 		font-family: 'comfortaa';
 		color: var(--verde_oscuro);
 	}
@@ -194,18 +194,6 @@
 		color: var(--verde_secundario);
 	}
 
-	.titulo {
-		@apply flex justify-center;
-	}
-
-	.titulo h1 {
-		@apply rounded-2xl w-1/3 py-2 text-center text-xl font-semibold;
-
-		background-color: var(--verde_secundario);
-		font-family: var(--letra_titulo);
-		color: var(--verde_fondos);
-	}
-
 	.recomendaciones {
 		@apply mt-2 px-5 py-3 h-fit rounded-xl w-3/4 text-justify;
 		background-color: var(--verde_fondos);
@@ -219,42 +207,5 @@
 
 	.recuadro {
 		@apply p-4 rounded-xl;
-	}
-
-	.container::-webkit-scrollbar {
-		width: 12px;
-		height: 115px;
-	}
-	.container::-webkit-scrollbar-button {
-		width: 0px;
-		height: 0px;
-	}
-
-	.container::-webkit-scrollbar-thumb {
-		background: var(--verde_oscuro);
-		border: 0px none #ffffff;
-		border-radius: 50px;
-		height: auto;
-	}
-	.container::-webkit-scrollbar-thumb:hover {
-		background: var(--verde_primario);
-	}
-	.container::-webkit-scrollbar-thumb:active {
-		background: var(--verde_secundario);
-	}
-	.container::-webkit-scrollbar-track {
-		background: transparent;
-		border: 0px none #ffffff;
-		border-radius: 50px;
-		height: auto;
-	}
-	.container::-webkit-scrollbar-track:hover {
-		background: transparent;
-	}
-	.container::-webkit-scrollbar-track:active {
-		background: transparent;
-	}
-	.container::-webkit-scrollbar-corner {
-		background: transparent;
 	}
 </style>
