@@ -26,7 +26,7 @@
 	}
 
 	.main {
-		@apply min-h-screen w-full ml-20 p-2 grid place-items-center;
+		@apply min-h-screen w-full p-2 grid place-items-center;
 	}
 
 	.botones {
