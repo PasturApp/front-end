@@ -100,6 +100,7 @@
       })
       .then((responseData) => {
         console.log('Upload successful:', responseData);
+				// window.location.href = '/mediciones'; // redirects on success. not on fail. But maybe not needed
       })
       .catch((error) => {
         console.error('Error uploading data:', error);

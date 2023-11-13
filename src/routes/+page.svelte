@@ -13,12 +13,56 @@
 	import "swiper/css/bundle";
 
 	let swiper; // Define a variable to hold the Swiper instance
-
 	export let data;
-	const establecimiento = data.dashboard[0];
-	const plataforma = data.dashboard[1];
+	let establecimiento = [];
+	let plataforma = [];
+	let stockdash = [];
+	let tc = [];
+	let stockgrafica = []
+	async function fetchData() {
+		
+		let uuidCookie = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('uuid='))
+        ?.split('=')[1];
+    uuidCookie = uuidCookie ? uuidCookie.split(',')[0] : null;
+	const urls = [
+		`http://127.0.0.1:5000/api/user/${uuidCookie}/dashboard_plat`,
+		`http://127.0.0.1:5000/api/user/${uuidCookie}/dashboard_estable`,
+		`http://127.0.0.1:5000/api/user/${uuidCookie}/stock_table`,
+		`http://127.0.0.1:5000/api/user/${uuidCookie}/grafica_pastoreo`,
+		`http://127.0.0.1:5000/api/user/${uuidCookie}/grafica_tc`
+		];
+    if (uuidCookie) {
+		console.log(uuidCookie)
+        try {
+            const promises = urls.map(async (url) => {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch data from ${url}`);
+                }
+                const data = await response.json();
+                return data;
+            });
+			const results = await Promise.all(promises);
+			plataforma = results[0];
+			establecimiento = results[1];
+			stockdash = results[2];
+			tc = results[4]
+			console.log("stock", stockdash)
+			console.log(tc)
+			stockgrafica = results[2];
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    } else {
+        // Handle the case when uuidCookie doesn't exist
+        window.location.href = '/inicio_sesion';
+    }
+    }
 
-	onMount(() => {
+	onMount(async () => {
+		await fetchData();
 		swiper = new Swiper(".swiper", {
 			// Optional parameters
 			loop: true,
@@ -59,12 +103,12 @@
 			<div class="datos-resumen">
 				<div class="recuadro">
 					<h3>Fecha:</h3>
-					<p>{establecimiento.mes}</p>
+					<p>{establecimiento.date_estable}</p>
 				</div>
 				<div class="recuadro">
 					<h3>Carga:</h3>
 					<p>
-						{establecimiento.carga} VO/haSEP
+						{establecimiento.carga_estable} VO/haSEP
 					</p>
 				</div>
 			</div>
@@ -76,11 +120,11 @@
 			<div class="datos-resumen">
 				<div class="recuadro">
 					<h3>Producción individual:</h3>
-					<p>{establecimiento.produccion} lt/VO</p>
+					<p>{establecimiento.production_estable} lt/VO</p>
 				</div>
 				<div class="recuadro">
 					<h3>Productividad:</h3>
-					<p>{establecimiento.productividad} lt/ha/mes</p>
+					<p>{establecimiento.weight_estable} lt/ha/mes</p>
 				</div>
 			</div>
 		</article>
@@ -91,11 +135,11 @@
 			<div class="datos-resumen">
 				<div class="recuadro">
 					<h3>Oferta:</h3>
-					<p>{plataforma.tc} kgMS/ha/d</p>
+					<p>{stockdash.stock} kgMS/ha/d</p>
 				</div>
 				<div class="recuadro">
 					<h3>Demanda:</h3>
-					<p>{plataforma.demanda} kgMS/ha/d</p>
+					<p>{tc.tasa_crecimiento} kgMS/ha/d</p>
 				</div>
 			</div>
 		</article>

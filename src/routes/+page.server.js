@@ -1,69 +1,32 @@
-/** @type {import('./$types').PageServerLoad} */
-import { onMount } from 'svelte';
-
-let uuidCookie;
-
-onMount(() => {
-  // Check if logged in
-  uuidCookie = document.cookie
-    .split('; ')
-    .find((row) => row.startsWith('uuid='))
-    ?.split('=')[1];
-  uuidCookie = uuidCookie ? uuidCookie.split(',')[0] : null;
-
-  if (!uuidCookie) {
-    // Redirect if not logged in
-    window.location.href = '/inicio_sesion';
-  }
-})
-
-export async function load() {
-
-  const endpoints = [
-    `http://localhost:5000/api/user/${uuidCookie}/dashboard_estable`,
-    `http://localhost:5000/api/user/${uuidCookie}/dashboard_plat`,
-    `http://localhost:5000/api/user/${uuidCookie}/stock_table`,
-    `http://localhost:5000/api/user/${uuidCookie}/grafica_pastoreo`
-  ]
-  const requests = endpoints.map(endpoint => fetchData(endpoint));
-  const [dashboardEstable, dashboardPlat, stock, pasture] = await Promise.all(requests);
-  const valoresStockY = stock.map(lista => lista[0]);
-  const valoresStockX = stock.map(lista => lista[1]);
-  const valorespastureX = pasture.map(lista => lista[0]);
-  const valorespastureY = pasture.map(lista => lista[1]);
-  console.log("Dashboard Estable:", dashboardEstable);
-  console.log("Dashboard Plat:", dashboardPlat);
-  console.log("Valores X de stock:", valoresStockX);
-  console.log("Valores Y de stock:", valoresStockY);
-  console.log("Valores X de pasture:", valorespastureX);
-  console.log("Valores Y de pasture:", valorespastureY);
+/** @type {import('svelte').Load} */
+export async function load({ fetch, context }) { 
   const dashboard = [{
-    mes: dashboardEstable[0],
-    produccion: dashboardEstable[1],
-    carga: dashboardEstable[2],
-    productividad: dashboardEstable[3]
+    mes: 43,
+    produccion: 12,
+    carga: 22,
+    productividad: 32
   },
   {
-    tc: dashboardPlat[0],
-    demanda: dashboardPlat[0] - dashboardEstable[2],
+    tc: 22,
+    demanda: 1,
   }]
 
   const data = [
     {
-      labels: valoresStockX,
+      labels: ["jueve", "vierne", "dia"],
       datasets: [
         {
           label: 'Stock',
-          data: valoresStockY
+          data: [12, 32, 42]
         }
       ]
     },
     {
-      labels: valorespastureX,
+      labels: ["jueve", "vierne", "dia"],
       datasets: [
         {
           label: 'Disponibilidad',
-          data: valorespastureY,
+          data: [12, 32, 42],
           borderWidth: 1,
           backgroundColor: ['#0C523B'],
         }
@@ -313,11 +276,4 @@ export async function load() {
     }
   ];
   return { dashboard, charts }
-}
-async function fetchData(url) {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`DATA GET ERROR: ${response.status} ${response.statusText}`);
-  }
-  return response.json();
 }
