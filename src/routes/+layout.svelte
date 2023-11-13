@@ -22,6 +22,10 @@
 
 {#if ['/landing', '/registro', '/rol', '/inicio_sesion'].includes($page.url.pathname)}
 	<slot />
+{:else if ['/registro', '/rol', '/inicio_sesion'].includes($page.url.pathname)}
+	<main class="main">
+		<slot />
+	</main>
 {:else}
 	<div class:user-in={authenticated}>
 		{#if authenticated}

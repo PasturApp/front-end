@@ -1,17 +1,25 @@
 <script>
+	import { onMount } from 'svelte';
+
 	let estados = [];
 	let ops = [];
 	export let data;
+	onMount(() => {
+		const form = document.getElementById('my_form');
 
-	const formatter = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' });
+		form.addEventListener('submit', function handleSubmit(event) {
+			event.preventDefault();
+			form.reset();
+		});
+	});
 </script>
 
 <div>
 	<h1>Mediciones</h1>
-	<form>
+	<form id="my_form">
 		<div class="Potrero">
 			<label for="select">Potrero</label><br />
-			<select name="select">
+			<select name="select" required>
 				<option value="" disabled selected>Seleccionar...</option>
 				{#each data.potreros as potrero}
 					<option value="value1">{potrero}</option>
@@ -20,14 +28,14 @@
 		</div>
 		<div>
 			<label for="Fecha">Fecha</label><br />
-			<input type="date" id="Fecha" name="Fecha" />
+			<input type="date" id="Fecha" name="Fecha" required />
 		</div>
 		<div>
 			<h2>Estado</h2>
 
 			{#each ['Pastoreo', 'Reserva', 'Barbecho'] as estado}
 				<div class="opciones">
-					<input type="radio" value={estado} bind:group={estados} />
+					<input type="radio" value={estado} bind:group={estados} required />
 					<label class="opciones" for="estado">{estado}</label>
 				</div>
 			{/each}
@@ -37,7 +45,7 @@
 
 			{#each ['Si', 'No', 'Remanente'] as opciones}
 				<label class="opciones" for="opciones">
-					<input type="radio" value={opciones} bind:group={ops} />
+					<input type="radio" value={opciones} bind:group={ops} required />
 					{opciones}
 				</label>
 			{/each}
@@ -51,7 +59,7 @@
 				{:else if data.metodoUtilizado === 'regla'}
 					<label for="disponibilidad">Altura de regla (cm)</label>
 				{/if}
-				<input type="text" id="disponibiliad" name="disponibiliad" />
+				<input type="text" id="disponibiliad" name="disponibiliad" required />
 			</div>
 		</div>
 

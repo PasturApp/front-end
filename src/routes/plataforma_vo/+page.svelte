@@ -1,20 +1,30 @@
 <script>
 	export let data;
 	const potreros = data.potreros;
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		const form = document.getElementById('my_form');
+
+		form.addEventListener('submit', function handleSubmit(event) {
+			event.preventDefault();
+			form.reset();
+		});
+	});
 </script>
 
 <div>
 	<h1>Plataforma de pastoreo de VO</h1>
 	<div class="one">
-		<form>
+		<form id="my_form">
 			<div class="potrero">
 				<label for="potrero">Potrero</label>
-				<input type="text" id="potrero" name="potrero" />
+				<input type="text" id="potrero" name="potrero" required />
 			</div>
 
 			<div class="area">
 				<label for="area">Área (ha)</label>
-				<input type="text" id="area" name="area" />
+				<input type="text" id="area" name="area" required />
 			</div>
 
 			<button type="submit">Ingresar</button>

@@ -1,11 +1,20 @@
 <script>
+	import { onMount } from 'svelte';
 	let exportados = [];
+	onMount(() => {
+		const form = document.getElementById('my_form');
+
+		form.addEventListener('submit', function handleSubmit(event) {
+			event.preventDefault();
+			form.reset();
+		});
+	});
 </script>
 
 <div>
 	<h1>Exportar datos</h1>
 
-	<form>
+	<form id="my_form">
 		{#each ['Plataforma', 'Stock', 'Tasa de crecimiento'] as opciones}
 			<div class="opciones">
 				<input type="checkbox" value={opciones} bind:group={exportados} />

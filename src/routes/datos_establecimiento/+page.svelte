@@ -1,41 +1,48 @@
 <script>
+	import { onMount } from 'svelte';
 	let metodos = [];
+	onMount(() => {
+		const form = document.getElementById('my_form');
 
-	const formatter = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' });
+		form.addEventListener('submit', function handleSubmit(event) {
+			event.preventDefault();
+			form.reset();
+		});
+	});
 </script>
 
 <div>
 	<h1>Datos del establecimiento</h1>
-	<form>
+	<form id="my_form">
 		<div>
 			<label for="mes">Fecha</label><br />
-			<input type="date" id="mes" name="mes" />
+			<input type="date" id="mes" name="mes" required />
 		</div>
 		<div class="vacas">
 			<label for="vacas">N° de Vacas en Ordeñe</label><br />
-			<input type="text" id="vacas" name="vacas" />
+			<input type="text" id="vacas" name="vacas" required />
 		</div>
 		<div>
 			<label for="pesoVivo">Peso vivo (kg/VO)</label><br />
-			<input type="text" id="pesoVivo" name="pesoVivo" />
+			<input type="text" id="pesoVivo" name="pesoVivo" required />
 		</div>
 		<div class="producción">
 			<label for="produccion">Producción individual (lt/VO)</label><br />
-			<input type="text" id="produccion" name="produccion" />
+			<input type="text" id="produccion" name="produccion" required />
 		</div>
 		<div>
 			<h2>Método de medición</h2>
 
 			{#each ['Visual', 'Regla', 'Plato medidor'] as metodo}
 				<div class="metodo">
-					<input type="radio" value={metodo} bind:group={metodos} />
+					<input type="radio" value={metodo} bind:group={metodos} required />
 					<label class="metodo" for="metodo">{metodo}</label>
 				</div>
 			{/each}
 		</div>
 		<div class="stock">
 			<label for="stock">Stock objetivo(kg/ha)</label>
-			<input type="text" id="disponibiliad" name="disponibiliad" value="2500" />
+			<input type="text" id="disponibiliad" name="disponibiliad" value="2500" required />
 		</div>
 
 		<button type="submit">Ingresar</button>

@@ -15,11 +15,17 @@
 		<form>
 			<div>
 				<label for="email">Email</label><br />
-				<input type="text" id="email" name="email" placeholder="email@ejemplo.com" />
+				<input type="text" id="email" name="email" placeholder="email@ejemplo.com" required />
 			</div>
 			<div>
 				<label for="contraseña">Contraseña</label><br />
-				<input type="password" id="contraseña" name="constraseña" placeholder="••••••••••" />
+				<input
+					type="password"
+					id="contraseña"
+					name="constraseña"
+					placeholder="••••••••••"
+					required
+				/>
 			</div>
 			<button type="submit">Iniciar Sesión</button>
 		</form>

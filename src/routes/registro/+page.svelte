@@ -16,28 +16,34 @@
 			<div class="nombreApellido">
 				<div>
 					<label for="nombre">Nombre</label><br />
-					<input type="text" id="nombre" name="nombre" placeholder="Betty" />
+					<input type="text" id="nombre" name="nombre" placeholder="Betty" required />
 				</div>
 				<div>
 					<label for="email">Apellido</label><br />
-					<input type="text" id="apellido" name="apellido" placeholder="Doomberton" />
+					<input type="text" id="apellido" name="apellido" placeholder="Doomberton" required />
 				</div>
 			</div>
 			<div>
 				<label for="email">Email</label><br />
-				<input type="text" id="email" name="email" placeholder="email@ejemplo.com" />
+				<input type="text" id="email" name="email" placeholder="email@ejemplo.com" required />
 			</div>
 			<div>
 				<label for="constraseña">Contraseña</label><br />
-				<input type="password" id="constraseña" name="constraseña" placeholder="••••••••••" />
+				<input
+					type="password"
+					id="constraseña"
+					name="constraseña"
+					placeholder="••••••••••"
+					required
+				/>
 			</div>
 			<div>
 				<label for="confirmar">Confirmar Contraseña</label><br />
-				<input type="password" id="confirmar" name="confirmar" placeholder="••••••••••" />
+				<input type="password" id="confirmar" name="confirmar" placeholder="••••••••••" required />
 			</div>
 			<div>
 				<label for="celular">Celular</label><br />
-				<input type="int" id="celular" name="celular" value="+598" />
+				<input type="int" id="celular" name="celular" value="+598" required />
 			</div>
 			<button type="submit">Registrarse</button>
 		</form>
