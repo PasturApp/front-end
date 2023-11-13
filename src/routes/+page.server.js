@@ -1,32 +1,32 @@
-/** @type {import('./$types').PageServerLoad} */
-export async function load() {
+/** @type {import('svelte').Load} */
+export async function load({ fetch, context }) { 
   const dashboard = [{
-    mes: 'Septiembre',
-    produccion: 25,
-    carga: 1.25,
-    productividad: 953
+    mes: 43,
+    produccion: 12,
+    carga: 22,
+    productividad: 32
   },
   {
-    tc: 40,
-    demanda: 35,
+    tc: 22,
+    demanda: 1,
   }]
 
   const data = [
     {
-      labels: ['3/8/23', '18/8/23', '2/9/23', '17/9/23', '1/10/23'],
+      labels: ["jueve", "vierne", "dia"],
       datasets: [
         {
           label: 'Stock',
-          data: [2750, 2300, 2650, 2500, 2700]
+          data: [12, 32, 42]
         }
       ]
     },
     {
-      labels: ['1A', '3E', '3F', '6D', '6A', '4A'],
+      labels: ["jueve", "vierne", "dia"],
       datasets: [
         {
-          label: 'Potreros',
-          data: [3680, 3500, 2800, 2750, 2200, 1800],
+          label: 'Disponibilidad',
+          data: [12, 32, 42],
           borderWidth: 1,
           backgroundColor: ['#0C523B'],
         }
@@ -276,4 +276,4 @@ export async function load() {
     }
   ];
   return { dashboard, charts }
-} 
+}
