@@ -1,15 +1,5 @@
 /** @type {import('svelte').Load} */
 export async function load({ fetch, context }) { 
-  const dashboard = [{
-    mes: 43,
-    produccion: 12,
-    carga: 22,
-    productividad: 32
-  },
-  {
-    tc: 22,
-    demanda: 1,
-  }]
 
   const data = [
     {
@@ -275,5 +265,5 @@ export async function load({ fetch, context }) {
       }
     }
   ];
-  return { dashboard, charts }
+  return { charts }
 }

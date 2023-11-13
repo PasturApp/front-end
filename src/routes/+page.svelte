@@ -19,6 +19,8 @@
 	let stockdash = [];
 	let tc = [];
 	let stockgrafica = []
+	let carga = []
+
 	async function fetchData() {
 		
 		let uuidCookie = document.cookie
@@ -31,7 +33,8 @@
 		`http://127.0.0.1:5000/api/user/${uuidCookie}/dashboard_estable`,
 		`http://127.0.0.1:5000/api/user/${uuidCookie}/stock_table`,
 		`http://127.0.0.1:5000/api/user/${uuidCookie}/grafica_pastoreo`,
-		`http://127.0.0.1:5000/api/user/${uuidCookie}/grafica_tc`
+		`http://127.0.0.1:5000/api/user/${uuidCookie}/grafica_tc`,
+		`http://127.0.0.1:5000/api/user/${uuidCookie}/carga`
 		];
     if (uuidCookie) {
 		console.log(uuidCookie)
@@ -49,6 +52,8 @@
 			establecimiento = results[1];
 			stockdash = results[2];
 			tc = results[4]
+			carga = results[5]
+			console.log("estable", establecimiento)
 			console.log("stock", stockdash)
 			console.log(tc)
 			stockgrafica = results[2];
@@ -108,7 +113,7 @@
 				<div class="recuadro">
 					<h3>Carga:</h3>
 					<p>
-						{establecimiento.carga_estable} VO/haSEP
+						{carga} VO/haSEP
 					</p>
 				</div>
 			</div>
