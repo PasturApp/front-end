@@ -18,47 +18,50 @@
 	let plataforma = [];
 	let stockdash = [];
 	let tc = [];
-	let stockgrafica = []
+	let stockgrafica = [];
 	let carga = [];
+	let productividad = 0;
 	async function fetchData() {
-		
 		let uuidCookie = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('uuid='))
-        ?.split('=')[1];
-    uuidCookie = uuidCookie ? uuidCookie.split(',')[0] : null;
-	const urls = [
-		`http://127.0.0.1:5000/api/user/${uuidCookie}/dashboard_plat`,
-		`http://127.0.0.1:5000/api/user/${uuidCookie}/dashboard_estable`,
-		`http://127.0.0.1:5000/api/user/${uuidCookie}/carga`
+			.split("; ")
+			.find((row) => row.startsWith("uuid="))
+			?.split("=")[1];
+		uuidCookie = uuidCookie ? uuidCookie.split(",")[0] : null;
+		const urls = [
+			`http://127.0.0.1:5000/api/user/${uuidCookie}/dashboard_plat`,
+			`http://127.0.0.1:5000/api/user/${uuidCookie}/dashboard_estable`,
+			`http://127.0.0.1:5000/api/user/${uuidCookie}/carga`,
 		];
-    if (uuidCookie) {
-		console.log(uuidCookie)
-        try {
-            const promises = urls.map(async (url) => {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`Failed to fetch data from ${url}`);
-                }
-                const data = await response.json();
-                return data;
-            });
-			const results = await Promise.all(promises);
-			plataforma = results[0];
-			establecimiento = results[1];
-			carga = results[2];
-			console.log("Estable", establecimiento)
-			console.log("stock", stockdash)
-			console.log(tc)
-			stockgrafica = results[2];
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    } else {
-        // Handle the case when uuidCookie doesn't exist
-        window.location.href = '/inicio_sesion';
-    }
-    }
+		if (uuidCookie) {
+			console.log(uuidCookie);
+			try {
+				const promises = urls.map(async (url) => {
+					const response = await fetch(url);
+					if (!response.ok) {
+						throw new Error(`Failed to fetch data from ${url}`);
+					}
+					const data = await response.json();
+					return data;
+				});
+				const results = await Promise.all(promises);
+				plataforma = results[0];
+				establecimiento = results[1];
+				carga = results[2];
+				productividad = Math.floor(
+					establecimiento.production_estable * carga * 30.5
+				);
+				console.log("Estable", establecimiento);
+				console.log("stock", stockdash);
+				console.log(tc);
+				stockgrafica = results[2];
+			} catch (error) {
+				console.error("Error fetching data:", error);
+			}
+		} else {
+			// Handle the case when uuidCookie doesn't exist
+			window.location.href = "/inicio_sesion";
+		}
+	}
 
 	onMount(async () => {
 		await fetchData();
@@ -123,7 +126,9 @@
 				</div>
 				<div class="recuadro">
 					<h3>Productividad:</h3>
-					<p>{1015} lt/ha/mes</p>
+					<p>
+						{productividad} lt/ha/mes
+					</p>
 				</div>
 			</div>
 		</article>
@@ -134,11 +139,11 @@
 			<div class="datos-resumen">
 				<div class="recuadro">
 					<h3>Oferta:</h3>
-					<p>{40} kgMS/ha/d</p>
+					<p>{35} kgMS/ha/d</p>
 				</div>
 				<div class="recuadro">
 					<h3>Demanda:</h3>
-					<p>{33} kgMS/ha/d</p>
+					<p>{22.5} kgMS/ha/d</p>
 				</div>
 			</div>
 		</article>

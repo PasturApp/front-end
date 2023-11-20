@@ -62,7 +62,7 @@ export async function load() {
       datasets: [
         {
           label: 'Area',
-          data: [6, 2, 0],
+          data: [5, 3, 2],
           borderWidth: 1,
           backgroundColor: ['#0C523B', '#528A3F', '#D3D8BD']
         }
@@ -90,7 +90,7 @@ export async function load() {
           },
           {
             label: 'Rango obj. min',
-            data: [2750, 2750, 2750, 2750, 2750],
+            data: [2750, 2750, 2750, 2750, 2750, 2750, 2750, 2750],
             borderColor: '#CFE7D1',
             backgroundColor: '#CFE7D1',
             pointRadius: 0,
@@ -98,7 +98,7 @@ export async function load() {
           },
           {
             label: 'Rango obj. max',
-            data: [2250, 2250, 2250, 2250, 2250],
+            data: [2250, 2250, 2250, 2250, 2250, 2250, 2250, 2250],
             borderColor: '#CFE7D1',
             backgroundColor: '#CFE7D1',
             pointRadius: 0,
