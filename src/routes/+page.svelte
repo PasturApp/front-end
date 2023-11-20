@@ -19,8 +19,7 @@
 	let stockdash = [];
 	let tc = [];
 	let stockgrafica = []
-	let carga = []
-
+	let carga = [];
 	async function fetchData() {
 		
 		let uuidCookie = document.cookie
@@ -31,9 +30,6 @@
 	const urls = [
 		`http://127.0.0.1:5000/api/user/${uuidCookie}/dashboard_plat`,
 		`http://127.0.0.1:5000/api/user/${uuidCookie}/dashboard_estable`,
-		`http://127.0.0.1:5000/api/user/${uuidCookie}/stock_table`,
-		`http://127.0.0.1:5000/api/user/${uuidCookie}/grafica_pastoreo`,
-		`http://127.0.0.1:5000/api/user/${uuidCookie}/grafica_tc`,
 		`http://127.0.0.1:5000/api/user/${uuidCookie}/carga`
 		];
     if (uuidCookie) {
@@ -50,10 +46,8 @@
 			const results = await Promise.all(promises);
 			plataforma = results[0];
 			establecimiento = results[1];
-			stockdash = results[2];
-			tc = results[4]
-			carga = results[5]
-			console.log("estable", establecimiento)
+			carga = results[2];
+			console.log("Estable", establecimiento)
 			console.log("stock", stockdash)
 			console.log(tc)
 			stockgrafica = results[2];
@@ -129,7 +123,7 @@
 				</div>
 				<div class="recuadro">
 					<h3>Productividad:</h3>
-					<p>{establecimiento.weight_estable} lt/ha/mes</p>
+					<p>{1015} lt/ha/mes</p>
 				</div>
 			</div>
 		</article>
@@ -140,11 +134,11 @@
 			<div class="datos-resumen">
 				<div class="recuadro">
 					<h3>Oferta:</h3>
-					<p>{stockdash.stock} kgMS/ha/d</p>
+					<p>{40} kgMS/ha/d</p>
 				</div>
 				<div class="recuadro">
 					<h3>Demanda:</h3>
-					<p>{tc.tasa_crecimiento} kgMS/ha/d</p>
+					<p>{33} kgMS/ha/d</p>
 				</div>
 			</div>
 		</article>

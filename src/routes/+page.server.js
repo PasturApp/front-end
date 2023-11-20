@@ -1,33 +1,59 @@
-/** @type {import('svelte').Load} */
-export async function load({ fetch, context }) { 
-
+/** @type {import('./$types').PageServerLoad} */
+export async function load() {
+  const endpoints = [
+    "http://localhost:5000/api/grafica_pastoreo",
+    "http://localhost:5000/api/stock",
+    "http://localhost:5000/api/grafica_tc"
+  ]
+  const requests = endpoints.map(endpoint => fetchData(endpoint));
+  const [pasture, stock, tc] = await Promise.all(requests); 
+  console.log("pasture", pasture)
+  console.log("stock", stock)
+  console.log("tc", tc)
+  const valoresStockY = stock.map(lista => lista[0]);
+  console.log(valoresStockY)
+  const valoresStockX = stock.map(lista => lista[1]);
+  const valorespastureX = pasture.map(lista => lista[0]);
+  const valorespastureY = pasture.map(lista => lista[1]);
+  const valorestcX = tc.map(lista => lista[0]);
+  const valorestcY = tc.map(lista => lista[1]);
+  const dashboard = [{
+    mes: 43,
+    produccion: 12,
+    carga: 22,
+    productividad: 32
+  },
+  {
+    tc: 22,
+    demanda: 1,
+  }]
   const data = [
     {
-      labels: ["jueve", "vierne", "dia"],
+      labels: valoresStockX,
       datasets: [
         {
           label: 'Stock',
-          data: [12, 32, 42]
+          data: valoresStockY
         }
       ]
     },
     {
-      labels: ["jueve", "vierne", "dia"],
+      labels: valorespastureX,
       datasets: [
         {
           label: 'Disponibilidad',
-          data: [12, 32, 42],
+          data: valorespastureY,
           borderWidth: 1,
           backgroundColor: ['#0C523B'],
         }
       ]
     },
     {
-      labels: ['3/8/23', '18/8/23', '2/9/23', '17/9/23', '1/10/23'],
+      labels: valorestcY,
       datasets: [
         {
           label: 'Tasa de crecimiento',
-          data: [30, 50, 45, 58, 45]
+          data: valorestcX
         }
       ]
     },
@@ -36,7 +62,7 @@ export async function load({ fetch, context }) {
       datasets: [
         {
           label: 'Area',
-          data: [40, 15, 5],
+          data: [6, 2, 0],
           borderWidth: 1,
           backgroundColor: ['#0C523B', '#528A3F', '#D3D8BD']
         }
@@ -199,7 +225,7 @@ export async function load({ fetch, context }) {
               text: 'kgMS/ha'
             },
             min: 0,
-            max: 120
+            max: 70
           },
           x: {
             grid: {
@@ -265,5 +291,19 @@ export async function load({ fetch, context }) {
       }
     }
   ];
-  return { charts }
+  return { dashboard, charts }
+}
+async function fetchData(url) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`DATA GET ERROR: ${response.status} ${response.statusText}`);
+  }
+  return response.json();
+}
+async function fetchData(url) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`DATA GET ERROR: ${response.status} ${response.statusText}`);
+  }
+  return response.json();
 }
