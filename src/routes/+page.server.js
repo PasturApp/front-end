@@ -6,7 +6,7 @@ export async function load() {
     "http://localhost:5000/api/grafica_tc"
   ]
   const requests = endpoints.map(endpoint => fetchData(endpoint));
-  const [pasture, stock, tc] = await Promise.all(requests); 
+  const [pasture, stock, tc] = await Promise.all(requests);
   console.log("pasture", pasture)
   console.log("stock", stock)
   console.log("tc", tc)
@@ -292,13 +292,6 @@ export async function load() {
     }
   ];
   return { dashboard, charts }
-}
-async function fetchData(url) {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`DATA GET ERROR: ${response.status} ${response.statusText}`);
-  }
-  return response.json();
 }
 async function fetchData(url) {
   const response = await fetch(url);
