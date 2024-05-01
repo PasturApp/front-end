@@ -1,5 +1,5 @@
 .DS_Store
-# /build
+/build
 /.svelte-kit
 /package
 .env
